@@ -1,7 +1,6 @@
 # src/core/models.py
 from __future__ import annotations
 
-from typing import List
 from pydantic import BaseModel, Field
 
 
@@ -14,7 +13,7 @@ class SourceRef(BaseModel):
 
 class Trend(BaseModel):
     text: str = Field(..., description="Short phrase naming the trend")
-    sources: List[SourceRef]
+    sources: list[SourceRef]
 
 
 class Company(BaseModel):
@@ -23,26 +22,26 @@ class Company(BaseModel):
         default=None,
         description="One-line reason this company is relevant",
     )
-    sources: List[SourceRef]
+    sources: list[SourceRef]
 
 
 class WhitespaceOpportunity(BaseModel):
     description: str
-    sources: List[SourceRef]
+    sources: list[SourceRef]
 
 
 # ---------- Stage-2: extraction result for ONE document ------------------ #
 class DocumentExtraction(BaseModel):
     """What the LLM returns for a single cleaned article/page."""
     doc_source: SourceRef
-    trends: List[Trend] = []
-    companies: List[Company] = []
-    whitespace_opportunities: List[WhitespaceOpportunity] = []
+    trends: list[Trend] = []
+    companies: list[Company] = []
+    whitespace_opportunities: list[WhitespaceOpportunity] = []
 
 
 # ---------- Stage-4: final aggregated answer ----------------------------- #
 class ResearchReport(BaseModel):
     query: str
-    trends: List[Trend]
-    companies: List[Company]
-    whitespace_opportunities: List[WhitespaceOpportunity]
+    trends: list[Trend]
+    companies: list[Company]
+    whitespace_opportunities: list[WhitespaceOpportunity]

@@ -1,10 +1,11 @@
-import httpx
-import respx
-import pytest
 from textwrap import dedent
 
+import httpx
+import pytest
+import respx
+
 from gtmind.core.models import SourceRef
-from gtmind.core.parse import fetch_and_clean, CleanDocument
+from gtmind.core.parse import CleanDocument, fetch_and_clean
 
 FAKE_HTML = dedent(
     """

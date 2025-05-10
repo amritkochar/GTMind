@@ -3,17 +3,16 @@ from __future__ import annotations
 import asyncio
 import json
 import logging
-from typing import List
 
 import openai
 from tenacity import retry, stop_after_attempt, wait_exponential_jitter
 
 from gtmind.core.models import (
-    DocumentExtraction,
-    Trend,
     Company,
-    WhitespaceOpportunity,
+    DocumentExtraction,
     SourceRef,
+    Trend,
+    WhitespaceOpportunity,
 )
 from gtmind.core.parse import CleanDocument
 from gtmind.core.settings import settings
@@ -103,7 +102,7 @@ async def extract_document(doc: CleanDocument) -> DocumentExtraction | None:
     )
 
 
-async def batch_extract(docs: List[CleanDocument]) -> List[DocumentExtraction]:
+async def batch_extract(docs: list[CleanDocument]) -> list[DocumentExtraction]:
     sem = asyncio.Semaphore(5)
 
     async def _task(d: CleanDocument):
@@ -114,5 +113,5 @@ async def batch_extract(docs: List[CleanDocument]) -> List[DocumentExtraction]:
     return [d for d in out if d is not None]
 
 
-def batch_extract_sync(docs: List[CleanDocument]) -> List[DocumentExtraction]:
+def batch_extract_sync(docs: list[CleanDocument]) -> list[DocumentExtraction]:
     return asyncio.run(batch_extract(docs))

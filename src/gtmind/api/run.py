@@ -53,9 +53,9 @@ def _pipeline(query: str) -> ResearchReport:
 
 async def _async_pipeline(query: str) -> ResearchReport:
     """Async variant for FastAPI (non-blocking)."""
-    from gtmind.core.search import search
-    from gtmind.core.parse import batch_fetch_clean
     from gtmind.core.extract import batch_extract
+    from gtmind.core.parse import batch_fetch_clean
+    from gtmind.core.search import search
 
     urls = await search(query)
     docs = await batch_fetch_clean(urls)

@@ -40,7 +40,8 @@ selected_query = None
 loaded_data = None
 
 if recent_rows:
-    label = lambda r: f"{r.id} · {r.query[:50]}"
+    def label(r):
+        return f"{r.id} · {r.query[:50]}"
     choice = st.sidebar.selectbox("Select a report:", recent_rows, format_func=label)
     selected_query = choice.query
     loaded_data = json.loads(choice.json)

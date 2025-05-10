@@ -2,18 +2,16 @@ from __future__ import annotations
 
 import itertools
 import logging
-from collections import defaultdict
-from typing import List, Dict, Tuple
 
 from rapidfuzz import fuzz, process
 
 from gtmind.core.models import (
+    Company,
     DocumentExtraction,
     ResearchReport,
-    Trend,
-    Company,
-    WhitespaceOpportunity,
     SourceRef,
+    Trend,
+    WhitespaceOpportunity,
 )
 
 logger = logging.getLogger(__name__)
@@ -22,13 +20,13 @@ logger = logging.getLogger(__name__)
 
 
 def _dedupe_strings(
-    texts: List[Tuple[str, SourceRef]], threshold: int = 75
-) -> Dict[str, List[SourceRef]]:
+    texts: list[tuple[str, SourceRef]], threshold: int = 75
+) -> dict[str, list[SourceRef]]:
     """
     Collapse near-duplicate strings using RapidFuzz token-sort ratio.
     Returns {canonical_text: [sources]}.
     """
-    buckets: Dict[str, List[SourceRef]] = {}
+    buckets: dict[str, list[SourceRef]] = {}
 
     for text, src in texts:
         text_norm = text.lower()
@@ -47,14 +45,14 @@ def _dedupe_strings(
 
 
 def _merge_company_context(
-    companies: List[Tuple[str, SourceRef]]
-) -> Tuple[Dict[str, List[SourceRef]], Dict[str, str]]:
+    companies: list[tuple[str, SourceRef]]
+) -> tuple[dict[str, list[SourceRef]], dict[str, str]]:
     """
     Dedupe companies by lowercased name, but preserve original casing separately.
     Returns: (buckets, display_names)
     """
-    buckets: Dict[str, List[SourceRef]] = {}
-    display_names: Dict[str, str] = {}
+    buckets: dict[str, list[SourceRef]] = {}
+    display_names: dict[str, str] = {}
 
     for name, src in companies:
         key = name.lower()
@@ -70,20 +68,20 @@ def _merge_company_context(
 # --------------------------- public API ---------------------------------- #
 
 
-def aggregate(query: str, docs: List[DocumentExtraction]) -> ResearchReport:
+def aggregate(query: str, docs: list[DocumentExtraction]) -> ResearchReport:
     """Combine multiple extractions into one ResearchReport."""
     # --- collect raw tuples -------------------------------------------------
-    trend_pairs: List[Tuple[str, SourceRef]] = list(
+    trend_pairs: list[tuple[str, SourceRef]] = list(
         itertools.chain.from_iterable(
             [(t.text, src) for t in d.trends for src in t.sources] for d in docs
         )
     )
-    company_pairs: List[Tuple[str, SourceRef]] = list(
+    company_pairs: list[tuple[str, SourceRef]] = list(
         itertools.chain.from_iterable(
             [(c.name, src) for c in d.companies for src in c.sources] for d in docs
         )
     )
-    gap_pairs: List[Tuple[str, SourceRef]] = list(
+    gap_pairs: list[tuple[str, SourceRef]] = list(
         itertools.chain.from_iterable(
             [(w.description, src) for w in d.whitespace_opportunities for src in w.sources]
             for d in docs
@@ -96,13 +94,13 @@ def aggregate(query: str, docs: List[DocumentExtraction]) -> ResearchReport:
     company_buckets, display_names = _merge_company_context(company_pairs)
 
     # --- rank by frequency --------------------------------------------------
-    def _bucket_to_trend(text: str, sources: List[SourceRef]) -> Trend:
+    def _bucket_to_trend(text: str, sources: list[SourceRef]) -> Trend:
         return Trend(text=text, sources=sources)
 
-    def _bucket_to_gap(text: str, sources: List[SourceRef]) -> WhitespaceOpportunity:
+    def _bucket_to_gap(text: str, sources: list[SourceRef]) -> WhitespaceOpportunity:
         return WhitespaceOpportunity(description=text, sources=sources)
 
-    def _bucket_to_company(name: str, sources: List[SourceRef]) -> Company:
+    def _bucket_to_company(name: str, sources: list[SourceRef]) -> Company:
         return Company(name=name, context="", sources=sources)
 
     trends = sorted(

@@ -10,11 +10,12 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Annotated, List
+from typing import Annotated
 
-from sqlmodel import SQLModel, Field, create_engine, Session, select
+from sqlmodel import Field, Session, SQLModel, create_engine, select
 
 from gtmind.core.models import ResearchReport
+
 
 # ---------- ORM ----------------------------------------------------------- #
 class ReportRow(SQLModel, table=True):  # singular row = one ResearchReport
@@ -48,7 +49,7 @@ def save_report(report: ResearchReport, db_path: str | Path = "my.db") -> int:
         sess.refresh(row)
         return row.id  # type: ignore[return-value]
 
-def list_saved_reports(db_path: str | Path) -> List[ReportRow]:
+def list_saved_reports(db_path: str | Path) -> list[ReportRow]:
     db_path = str(db_path)
     engine = _engine(db_path)
     with Session(engine) as sess:

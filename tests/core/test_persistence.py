@@ -1,6 +1,7 @@
 # tests/core/test_persistence.py
-from gtmind.persistence import save_report
 from gtmind.core.models import ResearchReport
+from gtmind.persistence import save_report
+
 
 def test_save_roundtrip(tmp_path):
     db = tmp_path / "tmp.db"

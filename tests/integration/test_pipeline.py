@@ -1,6 +1,9 @@
 import os
+
 import pytest
+
 from gtmind.api.run import _pipeline
+
 
 @pytest.mark.skipif(
     not (os.getenv("SEARCH_API_KEY") and os.getenv("OPENAI_API_KEY")),

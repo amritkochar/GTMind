@@ -1,12 +1,11 @@
 import json
-from pathlib import Path
 
 import httpx
-import respx
 import pytest
+import respx
 
-from gtmind.core.search import search
 from gtmind.core.models import SourceRef
+from gtmind.core.search import search
 
 SERPER_URL = "https://google.serper.dev/search"
 

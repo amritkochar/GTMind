@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import asyncio
 import logging
-from typing import List
 
 import httpx
 
@@ -27,7 +26,7 @@ async def _fetch(query: str, client: httpx.AsyncClient) -> dict:
     return resp.json()
 
 
-async def search(query: str) -> List[SourceRef]:
+async def search(query: str) -> list[SourceRef]:
     """
     Perform a web search and return a list of SourceRef objects
     containing URL and title.  Uses Serper.dev; respects
@@ -38,7 +37,7 @@ async def search(query: str) -> List[SourceRef]:
 
     # Serper returns 'organic' list with items: {title, link, snippet}
     hits = data.get("organic", [])[: settings.max_docs]
-    results: List[SourceRef] = [
+    results: list[SourceRef] = [
         SourceRef(url=hit["link"], title=hit.get("title")) for hit in hits
     ]
     logger.info("search(%s) -> %s hits", query, len(results))
@@ -46,5 +45,5 @@ async def search(query: str) -> List[SourceRef]:
 
 
 # Synchronous helper for CLI / quick calls
-def search_sync(query: str) -> List[SourceRef]:
+def search_sync(query: str) -> list[SourceRef]:
     return asyncio.run(search(query))

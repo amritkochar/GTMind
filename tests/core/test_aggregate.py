@@ -1,10 +1,10 @@
 from gtmind.core.aggregate import aggregate
 from gtmind.core.models import (
-    DocumentExtraction,
-    Trend,
     Company,
-    WhitespaceOpportunity,
+    DocumentExtraction,
     SourceRef,
+    Trend,
+    WhitespaceOpportunity,
 )
 
 

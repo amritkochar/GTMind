@@ -1,10 +1,9 @@
-import asyncio
-from pathlib import Path
 from textwrap import dedent
+
 import pytest
 
-from gtmind.core.parse import CleanDocument
 from gtmind.core.extract import extract_document
+from gtmind.core.parse import CleanDocument
 
 # --- stub CleanDocument ---
 _DOC = CleanDocument(

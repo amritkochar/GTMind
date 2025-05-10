@@ -83,8 +83,6 @@ Run the following commands to start the backend and frontend services:
 make serve  # FastAPI on :8000
 make ui     # Streamlit on :8501
 ```
-```
-
 
 ### CLI Example
 

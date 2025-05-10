@@ -2,13 +2,11 @@ from __future__ import annotations
 
 import asyncio
 import logging
-from typing import List
 
 import httpx
 import trafilatura
 
 from gtmind.core.models import SourceRef
-from gtmind.core.settings import settings
 
 logger = logging.getLogger(__name__)
 
@@ -56,7 +54,7 @@ async def fetch_and_clean(source: SourceRef) -> CleanDocument | None:
     return CleanDocument(url=source.url, title=source.title, text=text)
 
 
-async def batch_fetch_clean(sources: List[SourceRef]) -> List[CleanDocument]:
+async def batch_fetch_clean(sources: list[SourceRef]) -> list[CleanDocument]:
     """Parallel fetch/clean with concurrency cap."""
     sem = asyncio.Semaphore(10)  # limit inflight requests
 
@@ -68,6 +66,6 @@ async def batch_fetch_clean(sources: List[SourceRef]) -> List[CleanDocument]:
     return [doc for doc in cleaned if doc is not None]
 
 
-def batch_fetch_clean_sync(sources: List[SourceRef]) -> List[CleanDocument]:
+def batch_fetch_clean_sync(sources: list[SourceRef]) -> list[CleanDocument]:
     """Sync wrapper, handy for CLI."""
     return asyncio.run(batch_fetch_clean(sources))

@@ -4,7 +4,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
 
-from gtmind.core.models import ResearchReport, Trend, SourceRef
+from gtmind.core.models import ResearchReport, SourceRef, Trend
+
 
 def test_report_roundtrip():
     report = ResearchReport(
