@@ -15,9 +15,8 @@ from gtmind.core.models import (
     WhitespaceOpportunity,
 )
 from gtmind.core.parse import CleanDocument
+from gtmind.core.prompts import EXTRACTION_SYSTEM_PROMPT, EXTRACTION_TOOL_SCHEMA
 from gtmind.core.settings import settings
-from gtmind.core.prompts import EXTRACTION_TOOL_SCHEMA, EXTRACTION_SYSTEM_PROMPT
-
 
 logger = logging.getLogger(__name__)
 

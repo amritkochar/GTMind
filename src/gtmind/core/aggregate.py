@@ -1,12 +1,12 @@
 from __future__ import annotations
+
+import itertools
+import logging
 import re
 import unicodedata
 from collections import defaultdict
-import itertools
-import logging
-from typing import Dict, List, Tuple
+
 from rapidfuzz import fuzz
-from gtmind.core.settings import settings
 
 from gtmind.core.models import (
     Company,
@@ -16,6 +16,7 @@ from gtmind.core.models import (
     Trend,
     WhitespaceOpportunity,
 )
+from gtmind.core.settings import settings
 
 logger = logging.getLogger(__name__)
 
@@ -56,15 +57,15 @@ def _normalize(text: str) -> str:
 # ---------- de-dupe v2 ---------------------------------------------- #
 
 def _dedupe_strings(
-    texts: List[Tuple[str, SourceRef]],
+    texts: list[tuple[str, SourceRef]],
     threshold: int = settings.dedupe_threshold,
-) -> Dict[str, List[SourceRef]]:
+) -> dict[str, list[SourceRef]]:
     """
     Collapse near-duplicate strings using RapidFuzz token-sort ratio on
     *normalized* text. Returns {canonical_text: [sources]}.
     """
-    buckets: Dict[str, List[SourceRef]] = {}
-    norm_cache: Dict[str, str] = {}  # canonical_text -> normalized form
+    buckets: dict[str, list[SourceRef]] = {}
+    norm_cache: dict[str, str] = {}  # canonical_text -> normalized form
 
     for raw_text, src in texts:
         norm = _normalize(raw_text)
@@ -134,14 +135,14 @@ def aggregate(query: str, docs: list[DocumentExtraction]) -> ResearchReport:
 
     def _bucket_to_gap(text: str, sources: list[SourceRef]) -> WhitespaceOpportunity:
         uniq = {s.url: s for s in sources}.values()   # dedupe identical URLs
-        return WhitespaceOpportunity(description=text, sources=sources)
+        return WhitespaceOpportunity(description=text, sources=uniq)
 
     def _bucket_to_company(key: str, sources: list[SourceRef]) -> Company:
         uniq = {s.url: s for s in sources}.values()   # dedupe identical URLs
         return Company(
             name=display_names[key],
             context=context_map.get(key, ""),
-            sources=sources
+            sources=uniq
         )
 
     trends = sorted(

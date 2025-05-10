@@ -1,9 +1,8 @@
-import subprocess
 import json
-from pathlib import Path
-from gtmind.api.run import app
-import pytest
+import subprocess
+
 from fastapi.testclient import TestClient
+
 from gtmind.api.run import app
 
 client = TestClient(app)
@@ -33,7 +32,7 @@ def test_run_cli_creates_json(tmp_path):
 
 
 def test_get_report_success(monkeypatch):
-    from gtmind.core.models import ResearchReport, Trend, Company, WhitespaceOpportunity, SourceRef
+    from gtmind.core.models import ResearchReport, SourceRef, Trend
 
     async def _mock_async_pipeline(query: str):
         return ResearchReport(

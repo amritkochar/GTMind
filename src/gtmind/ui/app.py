@@ -12,9 +12,8 @@ from pathlib import Path
 import requests
 import streamlit as st
 
-from gtmind.persistence import list_saved_reports, save_report
 from gtmind.core.models import ResearchReport
-
+from gtmind.persistence import list_saved_reports, save_report
 
 # ------------------------------------------------------------------------- #
 # Config defaults (can override via env vars)
