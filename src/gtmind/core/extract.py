@@ -16,46 +16,12 @@ from gtmind.core.models import (
 )
 from gtmind.core.parse import CleanDocument
 from gtmind.core.settings import settings
+from gtmind.core.prompts import EXTRACTION_TOOL_SCHEMA, EXTRACTION_SYSTEM_PROMPT
+
 
 logger = logging.getLogger(__name__)
 
 _client = openai.AsyncOpenAI(api_key=settings.openai_api_key)
-
-_TOOL_SCHEMA = {
-    "type": "function",
-    "function": {
-        "name": "extract_insights",
-        "description": "Pull key trends, companies and whitespace gaps from article text.",
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "trends": {
-                    "type": "array",
-                    "items": {"type": "string"},
-                    "maxItems": 3,
-                },
-                "companies": {
-                    "type": "array",
-                    "items": {"type": "string"},
-                },
-                "whitespace_opportunities": {
-                    "type": "array",
-                    "items": {"type": "string"},
-                },
-            },
-            "required": ["trends", "companies", "whitespace_opportunities"],
-        },
-    },
-}
-
-_SYSTEM_PROMPT = (
-    "You are an industry research assistant. "
-    "Given an article, extract:\n"
-    "1. Up to three concise AI/tech trends discussed.\n"
-    "2. Companies mentioned (with relevance context).\n"
-    "3. Any problems or whitespace opportunities.\n"
-    "Respond via the provided JSON schema only."
-)
 
 
 @retry(wait=wait_exponential_jitter(1, 10), stop=stop_after_attempt(4))
@@ -65,11 +31,11 @@ async def _call_llm(doc: CleanDocument) -> dict:
 
     response = await _client.chat.completions.create(
         model=settings.model,
-        tools=[_TOOL_SCHEMA],
+        tools=[EXTRACTION_TOOL_SCHEMA],
         tool_choice={"type": "function", "function": {"name": "extract_insights"}},
         response_format={"type": "json_object"},
         messages=[
-            {"role": "system", "content": _SYSTEM_PROMPT},
+            {"role": "system", "content": EXTRACTION_SYSTEM_PROMPT},
             {"role": "user", "content": doc.text[:12_000]},  # truncate large docs
         ],
         temperature=0.2,
@@ -93,7 +59,8 @@ async def extract_document(doc: CleanDocument) -> DocumentExtraction | None:
         doc_source=source,
         trends=[Trend(text=t, sources=[source]) for t in data["trends"]],
         companies=[
-            Company(name=c, context="", sources=[source]) for c in data["companies"]
+            Company(name=c["name"], context=c["context"], sources=[source])
+            for c in data["companies"]
         ],
         whitespace_opportunities=[
             WhitespaceOpportunity(description=w, sources=[source])
@@ -103,7 +70,7 @@ async def extract_document(doc: CleanDocument) -> DocumentExtraction | None:
 
 
 async def batch_extract(docs: list[CleanDocument]) -> list[DocumentExtraction]:
-    sem = asyncio.Semaphore(5)
+    sem = asyncio.Semaphore(settings.extract_concurrency_limit)
 
     async def _task(d: CleanDocument):
         async with sem:

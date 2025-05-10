@@ -17,8 +17,8 @@ class AppSettings(BaseSettings):
     dedupe_threshold : int = Field(default=75)
     
     # Concurrency limits
-    fetch_concurrency_limit: int = Field(default=1)
-    extract_concurrency_limit: int = Field(default=1)
+    fetch_concurrency_limit: int = Field(default=10)
+    extract_concurrency_limit: int = Field(default=5)
 
 
 settings = AppSettings()  # type: ignore[call-arg]
