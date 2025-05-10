@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
+from typing import Any
 
 import httpx
 
@@ -16,7 +17,7 @@ class SearchError(RuntimeError):
     pass
 
 
-async def _fetch(query: str, client: httpx.AsyncClient) -> dict:
+async def _fetch(query: str, client: httpx.AsyncClient) -> dict[str, Any]:
     """Low-level call to Serper.dev."""
     headers = {"X-API-KEY": settings.search_api_key}
     payload = {"q": query, "num": 10, "gl": "us"}

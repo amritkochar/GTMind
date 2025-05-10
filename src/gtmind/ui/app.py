@@ -74,7 +74,7 @@ if run_btn and query_input.strip():
             report = ResearchReport.model_validate(data)
             row_id = save_report(report, db_path)
             st.sidebar.success(f"💾 Saved to DB (ID: {row_id})")
-            st.experimental_rerun()
+            st.experimental_rerun()  # type: ignore[attr-defined]
     else:
         st.error(f"Backend error {resp.status_code}: {resp.text[:200]}")
 

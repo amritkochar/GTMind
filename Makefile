@@ -11,7 +11,7 @@ update:
 
 check:
 	poetry run ruff check src tests
-	poetry run mypy src
+	poetry run mypy -p gtmind
 
 check-fix:
 	poetry run ruff check src tests --fix

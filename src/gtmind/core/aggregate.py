@@ -58,7 +58,7 @@ def _normalize(text: str) -> str:
 
 def _dedupe_strings(
     texts: list[tuple[str, SourceRef]],
-    threshold: int = settings.dedupe_threshold,
+    threshold: int = int(settings.dedupe_threshold),
 ) -> dict[str, list[SourceRef]]:
     """
     Collapse near-duplicate strings using RapidFuzz token-sort ratio on
@@ -129,20 +129,20 @@ def aggregate(query: str, docs: list[DocumentExtraction]) -> ResearchReport:
 
     # --- build models -------------------------------------------------------
     def _bucket_to_trend(text: str, sources: list[SourceRef]) -> Trend:
-        uniq = {s.url: s for s in sources}.values()   # dedupe identical URLs
-        return Trend(text=text, sources=list(uniq))
+        sources = list({s.url: s for s in sources}.values())
+        return Trend(text=text, sources=list(sources))
 
 
     def _bucket_to_gap(text: str, sources: list[SourceRef]) -> WhitespaceOpportunity:
-        uniq = {s.url: s for s in sources}.values()   # dedupe identical URLs
-        return WhitespaceOpportunity(description=text, sources=uniq)
+        sources = list({s.url: s for s in sources}.values())
+        return WhitespaceOpportunity(description=text, sources=sources)
 
     def _bucket_to_company(key: str, sources: list[SourceRef]) -> Company:
-        uniq = {s.url: s for s in sources}.values()   # dedupe identical URLs
+        sources = list({s.url: s for s in sources}.values())
         return Company(
             name=display_names[key],
             context=context_map.get(key, ""),
-            sources=uniq
+            sources=sources
         )
 
     trends = sorted(

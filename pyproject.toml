@@ -33,6 +33,7 @@ pytest = "^8.3.5"
 pytest-asyncio = "^0.26.0"
 coverage = {extras = ["toml"], version = "^7.8.0"}
 respx = ">=0.21,<1.0"
+types-requests = "^2.32.0.20250328"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
@@ -48,6 +49,9 @@ lint.ignore = ["E501"]
 python_version = "3.11"
 strict = true
 exclude = ["tests"]
+ignore_missing_imports = true
+explicit_package_bases = true
+namespace_packages = true
 
 
 [tool.pytest.ini_options]

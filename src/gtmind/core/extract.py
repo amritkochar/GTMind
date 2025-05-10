@@ -3,6 +3,7 @@ from __future__ import annotations
 import asyncio
 import json
 import logging
+from typing import Any
 
 import openai
 from tenacity import retry, stop_after_attempt, wait_exponential_jitter
@@ -24,7 +25,7 @@ _client = openai.AsyncOpenAI(api_key=settings.openai_api_key)
 
 
 @retry(wait=wait_exponential_jitter(1, 10), stop=stop_after_attempt(4))
-async def _call_llm(doc: CleanDocument) -> dict:
+async def _call_llm(doc: CleanDocument) -> dict[str, Any]:
     """Call GPT-4o in JSON-mode, retrying on 5xx/429."""
     logger.info("LLM extracting from %s", doc.url[:60])
 
