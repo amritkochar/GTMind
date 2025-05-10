@@ -1,5 +1,5 @@
 from __future__ import annotations
-
+from collections import defaultdict
 import itertools
 import logging
 
@@ -68,23 +68,25 @@ def _merge_company_context(
 
 # --------------------------- public API ---------------------------------- #
 
-
 def aggregate(query: str, docs: list[DocumentExtraction]) -> ResearchReport:
     """Combine multiple extractions into one ResearchReport."""
+
     # --- collect raw tuples -------------------------------------------------
-    trend_pairs: list[tuple[str, SourceRef]] = list(
+    trend_pairs = list(
         itertools.chain.from_iterable(
             [(t.text, src) for t in d.trends for src in t.sources] for d in docs
         )
     )
-    company_pairs: list[tuple[str, SourceRef]] = list(
-        itertools.chain.from_iterable(
-            [(c.name, src) for c in d.companies for src in c.sources] for d in docs
-        )
-    )
-    gap_pairs: list[tuple[str, SourceRef]] = list(
+    gap_pairs = list(
         itertools.chain.from_iterable(
             [(w.description, src) for w in d.whitespace_opportunities for src in w.sources]
+            for d in docs
+        )
+    )
+    # Also carry context now
+    company_triples = list(
+        itertools.chain.from_iterable(
+            [(c.name, c.context or "", src) for c in d.companies for src in c.sources]
             for d in docs
         )
     )
@@ -92,17 +94,32 @@ def aggregate(query: str, docs: list[DocumentExtraction]) -> ResearchReport:
     # --- dedupe -------------------------------------------------------------
     trend_buckets = _dedupe_strings(trend_pairs)
     gap_buckets = _dedupe_strings(gap_pairs)
-    company_buckets, display_names = _merge_company_context(company_pairs)
 
-    # --- rank by frequency --------------------------------------------------
+    # dedupe companies by name; preserve context and merge sources
+    context_map: dict[str, str] = {}
+    company_buckets: dict[str, list[SourceRef]] = defaultdict(list)
+    display_names: dict[str, str] = {}
+
+    for name, context, src in company_triples:
+        key = name.lower().strip()
+        company_buckets[key].append(src)
+        display_names[key] = name
+        if key not in context_map and context:
+            context_map[key] = context
+
+    # --- build models -------------------------------------------------------
     def _bucket_to_trend(text: str, sources: list[SourceRef]) -> Trend:
         return Trend(text=text, sources=sources)
 
     def _bucket_to_gap(text: str, sources: list[SourceRef]) -> WhitespaceOpportunity:
         return WhitespaceOpportunity(description=text, sources=sources)
 
-    def _bucket_to_company(name: str, sources: list[SourceRef]) -> Company:
-        return Company(name=name, context="", sources=sources)
+    def _bucket_to_company(key: str, sources: list[SourceRef]) -> Company:
+        return Company(
+            name=display_names[key],
+            context=context_map.get(key, ""),
+            sources=sources
+        )
 
     trends = sorted(
         (_bucket_to_trend(k, v) for k, v in trend_buckets.items()),
@@ -110,10 +127,7 @@ def aggregate(query: str, docs: list[DocumentExtraction]) -> ResearchReport:
         reverse=True,
     )
     companies = sorted(
-        (
-            Company(name=display_names[k], context="", sources=v)
-            for k, v in company_buckets.items()
-        ),
+        (_bucket_to_company(k, v) for k, v in company_buckets.items()),
         key=lambda c: len(c.sources),
         reverse=True,
     )
