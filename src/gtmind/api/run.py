@@ -106,9 +106,16 @@ def version():
 # -----------------------------------------------------------------------------
 @app.get("/report")
 async def get_report(q: str):
-    """HTTP: /report?q=AI+in+retail"""
     report = await _async_pipeline(q)
+
+    if not (report.trends or report.companies or report.whitespace_opportunities):
+        return JSONResponse(
+            status_code=204,
+            content={"detail": "No insights found for this query."}
+        )
+
     return JSONResponse(content=report.model_dump())
+
 
 
 # -----------------------------------------------------------------------------

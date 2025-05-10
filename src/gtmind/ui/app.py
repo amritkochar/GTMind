@@ -49,6 +49,9 @@ if recent_rows:
     choice = st.sidebar.selectbox("Select a report:", recent_rows, format_func=label)
     selected_query = choice.query
     loaded_data = json.loads(choice.json)
+    if not any([loaded_data.get("trends"), loaded_data.get("companies"), loaded_data.get("whitespace_opportunities")]):
+        st.warning("This report contains no insights. Try refining your query.")
+        st.stop()
 else:
     st.sidebar.info("No saved reports in this DB yet.")
 
@@ -64,6 +67,9 @@ if run_btn and query_input.strip():
         resp = requests.get(f"{BACKEND_URL}/report", params={"q": query_input}, timeout=120)
     if resp.status_code == 200:
         data = resp.json()
+        if not any([data.get("trends"), data.get("companies"), data.get("whitespace_opportunities")]):
+            st.warning("This report contains no insights. Try refining your query.")
+            st.stop()
         st.success("Done! Scroll for insights.")
         if save_enabled:
             report = ResearchReport.model_validate(data)
