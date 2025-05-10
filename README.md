@@ -95,7 +95,7 @@ streamlit run src/gtmind/ui/app.py
 ```bash
 poetry run gtmind run "AI in biotechnology" \
     --out biotech.json \
-    --save-sqlite my.db
+    --save-sqlite research.db
 ```
 
 ### API Example (runs async)

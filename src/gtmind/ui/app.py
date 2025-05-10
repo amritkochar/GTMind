@@ -20,7 +20,7 @@ from gtmind.core.models import ResearchReport
 # Config defaults (can override via env vars)
 # ------------------------------------------------------------------------- #
 BACKEND_URL = os.getenv("GTMIND_API_URL", "http://127.0.0.1:8000")
-DEFAULT_DB = os.getenv("GTMIND_DB_PATH", "my.db")
+DEFAULT_DB = os.getenv("GTMIND_DB_PATH", "research.db")
 
 st.set_page_config(page_title="GTMind Research UI", layout="wide")
 st.title("🔎 GTMind Research Agent")
