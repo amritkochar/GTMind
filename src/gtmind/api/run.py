@@ -76,7 +76,7 @@ def run(
     save_sqlite: Path | None = typer.Option(
         None, help="Persist report into this SQLite DB (creates if absent)"
     ),
-):
+) -> None :
     """Execute full pipeline and optionally save results."""
     report = _pipeline(query)
     data = report.model_dump()
@@ -97,7 +97,7 @@ def run(
 
 
 @cli.command()
-def version():
+def version() -> None:
     """Print installed package version."""
     import importlib.metadata as importlib_metadata
 
@@ -108,7 +108,7 @@ def version():
 # FastAPI route
 # -----------------------------------------------------------------------------
 @app.get("/report")
-async def get_report(q: str):
+async def get_report(q: str) -> JSONResponse:
     report = await _async_pipeline(q)
 
     if not (report.trends or report.companies or report.whitespace_opportunities):

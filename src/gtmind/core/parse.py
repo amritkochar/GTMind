@@ -17,40 +17,36 @@ class FetchError(RuntimeError):
 
 
 class CleanDocument(SourceRef):
-    """SourceRef enriched with cleaned article text."""
     text: str
 
 
-# ---------- private helpers ------------------------------------------------- #
 async def _download(url: str, client: httpx.AsyncClient) -> str:
-    """Fetch raw HTML (raises FetchError on HTTP failure)."""
     try:
-        resp = await client.get(url, timeout=20)
+        resp = await client.get(
+            url,
+            timeout=20,
+            headers={"User-Agent": "Mozilla/5.0 (compatible; GTMindBot/1.0)"}
+        )
         resp.raise_for_status()
         return resp.text
     except (httpx.HTTPError, httpx.TimeoutException) as exc:
-        status = getattr(exc.response, "status_code", None)
+        status = getattr(exc.response, "status_code", None)  # type: ignore[attr-defined]
         if status in {401, 403}:
-            logger.warning("Blocked by site (%s): %s", status, url)
+            logger.warning("Blocked (%s): %s", status, url)
         else:
-            logger.warning("Failed to fetch %s: %s", url, exc)
+            logger.warning("Fetch failed %s: %s", url, exc)
         raise FetchError(f"Failed to fetch {url}: {exc}") from exc
 
 
-
 def _clean_html(html: str) -> str | None:
-    """Return readable text via trafilatura; None if nothing extracted."""
     return trafilatura.extract(html, include_comments=False, include_tables=False)
 
 
-# ---------- public API ------------------------------------------------------ #
 async def fetch_and_clean(source: SourceRef) -> CleanDocument | None:
-    """Download a single URL and strip boilerplate; returns None on failure."""
     async with httpx.AsyncClient(follow_redirects=True) as client:
         try:
             html = await _download(source.url, client)
-        except FetchError as e:
-            logger.warning("%s", e)
+        except FetchError:
             return None
 
     text = _clean_html(html)
@@ -66,17 +62,15 @@ async def batch_fetch_clean(sources: list[SourceRef]) -> list[CleanDocument]:
         logger.warning("batch_fetch_clean() called with empty sources")
         return []
 
-    """Parallel fetch/clean with concurrency cap."""
-    sem = asyncio.Semaphore(settings.fetch_concurrency_limit)  # limit inflight requests
+    sem = asyncio.Semaphore(settings.fetch_concurrency_limit)
 
-    async def _task(src: SourceRef):
+    async def _task(src: SourceRef) -> CleanDocument | None:
         async with sem:
             return await fetch_and_clean(src)
 
     cleaned = await asyncio.gather(*(_task(s) for s in sources))
-    return [doc for doc in cleaned if doc is not None]
+    return [d for d in cleaned if d is not None]
 
 
 def batch_fetch_clean_sync(sources: list[SourceRef]) -> list[CleanDocument]:
-    """Sync wrapper, handy for CLI."""
     return asyncio.run(batch_fetch_clean(sources))

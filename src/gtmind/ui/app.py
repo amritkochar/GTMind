@@ -13,7 +13,7 @@ import requests
 import streamlit as st
 
 from gtmind.core.models import ResearchReport
-from gtmind.persistence import list_saved_reports, save_report
+from gtmind.persistence import ReportRow, list_saved_reports, save_report
 
 # ------------------------------------------------------------------------- #
 # Config defaults (can override via env vars)
@@ -43,7 +43,7 @@ selected_query = None
 loaded_data = None
 
 if recent_rows:
-    def label(r):
+    def label(r: ReportRow) -> str:
         return f"{r.id} · {r.query[:50]}"
     choice = st.sidebar.selectbox("Select a report:", recent_rows, format_func=label)
     selected_query = choice.query
