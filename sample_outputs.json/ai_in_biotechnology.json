@@ -1,0 +1,313 @@
+{
+    "query": "AI in biotechnology",
+    "trends": [
+      {
+        "text": "AI in precision medicine and orphan diseases",
+        "sources": [
+          {
+            "url": "https://biotechnology.georgetown.edu/news/the-future-of-artificial-intelligence-and-biotechnology/",
+            "title": "The Future of Artificial Intelligence and Biotechnology"
+          }
+        ]
+      },
+      {
+        "text": "AI in predicting 3D protein structures",
+        "sources": [
+          {
+            "url": "https://biotechnology.georgetown.edu/news/the-future-of-artificial-intelligence-and-biotechnology/",
+            "title": "The Future of Artificial Intelligence and Biotechnology"
+          }
+        ]
+      },
+      {
+        "text": "AI in mental health diagnosis and treatment",
+        "sources": [
+          {
+            "url": "https://biotechnology.georgetown.edu/news/the-future-of-artificial-intelligence-and-biotechnology/",
+            "title": "The Future of Artificial Intelligence and Biotechnology"
+          }
+        ]
+      },
+      {
+        "text": "AI-driven personalized medicine is transforming treatment approaches by tailoring therapies based on individual genetic profiles.",
+        "sources": [
+          {
+            "url": "https://www.forbes.com/councils/forbesbusinesscouncil/2024/06/24/emerging-trends-in-ai-in-biotech/",
+            "title": "Emerging Trends In AI In Biotech - Forbes"
+          }
+        ]
+      },
+      {
+        "text": "AI is streamlining the drug discovery process, making it faster and more cost-effective.",
+        "sources": [
+          {
+            "url": "https://www.forbes.com/councils/forbesbusinesscouncil/2024/06/24/emerging-trends-in-ai-in-biotech/",
+            "title": "Emerging Trends In AI In Biotech - Forbes"
+          }
+        ]
+      },
+      {
+        "text": "Data integration and interoperability are critical for maximizing AI's impact in biotech.",
+        "sources": [
+          {
+            "url": "https://www.forbes.com/councils/forbesbusinesscouncil/2024/06/24/emerging-trends-in-ai-in-biotech/",
+            "title": "Emerging Trends In AI In Biotech - Forbes"
+          }
+        ]
+      },
+      {
+        "text": "AI integration in drug discovery to automate tasks and generate insights",
+        "sources": [
+          {
+            "url": "https://www.mckinsey.com/featured-insights/the-next-normal/biotech",
+            "title": "The future of biotech: AI-driven drug discovery | McKinsey & Company"
+          }
+        ]
+      },
+      {
+        "text": "Focus on specific scientific and operational pain points in biopharma",
+        "sources": [
+          {
+            "url": "https://www.mckinsey.com/featured-insights/the-next-normal/biotech",
+            "title": "The future of biotech: AI-driven drug discovery | McKinsey & Company"
+          }
+        ]
+      },
+      {
+        "text": "Advanced analytics for real-world evidence generation",
+        "sources": [
+          {
+            "url": "https://www.mckinsey.com/featured-insights/the-next-normal/biotech",
+            "title": "The future of biotech: AI-driven drug discovery | McKinsey & Company"
+          }
+        ]
+      }
+    ],
+    "companies": [
+      {
+        "name": "DeepMind",
+        "context": "DeepMind developed AlphaFold, an AI platform that predicts protein structures, revolutionizing drug target identification.",
+        "sources": [
+          {
+            "url": "https://biotechnology.georgetown.edu/news/the-future-of-artificial-intelligence-and-biotechnology/",
+            "title": "The Future of Artificial Intelligence and Biotechnology"
+          }
+        ]
+      },
+      {
+        "name": "Stanford University",
+        "context": "Stanford University's research uses AI to predict effective depression treatments based on brainwave patterns.",
+        "sources": [
+          {
+            "url": "https://biotechnology.georgetown.edu/news/the-future-of-artificial-intelligence-and-biotechnology/",
+            "title": "The Future of Artificial Intelligence and Biotechnology"
+          }
+        ]
+      },
+      {
+        "name": "Pfizer-BioNTech",
+        "context": "Pfizer-BioNTech utilized mRNA research, initially considered unusable, for developing SARS-CoV-2 vaccines.",
+        "sources": [
+          {
+            "url": "https://biotechnology.georgetown.edu/news/the-future-of-artificial-intelligence-and-biotechnology/",
+            "title": "The Future of Artificial Intelligence and Biotechnology"
+          }
+        ]
+      },
+      {
+        "name": "Moderna",
+        "context": "Moderna used mRNA research to develop SARS-CoV-2 vaccines, highlighting the potential of previously disregarded technology.",
+        "sources": [
+          {
+            "url": "https://biotechnology.georgetown.edu/news/the-future-of-artificial-intelligence-and-biotechnology/",
+            "title": "The Future of Artificial Intelligence and Biotechnology"
+          }
+        ]
+      },
+      {
+        "name": "Tempus",
+        "context": "Tempus is developing platforms for AI-driven personalized medicine, offering custom cancer therapies and personalized treatment plans for rare diseases.",
+        "sources": [
+          {
+            "url": "https://www.forbes.com/councils/forbesbusinesscouncil/2024/06/24/emerging-trends-in-ai-in-biotech/",
+            "title": "Emerging Trends In AI In Biotech - Forbes"
+          }
+        ]
+      },
+      {
+        "name": "Foundation Medicine",
+        "context": "Foundation Medicine is at the forefront of AI-driven personalized medicine, focusing on precision pharmacogenomics and custom cancer therapies.",
+        "sources": [
+          {
+            "url": "https://www.forbes.com/councils/forbesbusinesscouncil/2024/06/24/emerging-trends-in-ai-in-biotech/",
+            "title": "Emerging Trends In AI In Biotech - Forbes"
+          }
+        ]
+      },
+      {
+        "name": "Insilco Medicine",
+        "context": "Insilco Medicine is leading in AI-driven drug discovery, streamlining the process by predicting the efficacy and safety of potential compounds.",
+        "sources": [
+          {
+            "url": "https://www.forbes.com/councils/forbesbusinesscouncil/2024/06/24/emerging-trends-in-ai-in-biotech/",
+            "title": "Emerging Trends In AI In Biotech - Forbes"
+          }
+        ]
+      },
+      {
+        "name": "Atomwise",
+        "context": "Atomwise is a key player in AI-driven drug discovery, using AI models to analyze chemical databases for new drug candidates.",
+        "sources": [
+          {
+            "url": "https://www.forbes.com/councils/forbesbusinesscouncil/2024/06/24/emerging-trends-in-ai-in-biotech/",
+            "title": "Emerging Trends In AI In Biotech - Forbes"
+          }
+        ]
+      },
+      {
+        "name": "Ginkgo Bioworks",
+        "context": "Ginkgo Bioworks uses AI in synthetic biology to design custom microorganisms for applications in pharmaceuticals and industrial chemicals.",
+        "sources": [
+          {
+            "url": "https://www.forbes.com/councils/forbesbusinesscouncil/2024/06/24/emerging-trends-in-ai-in-biotech/",
+            "title": "Emerging Trends In AI In Biotech - Forbes"
+          }
+        ]
+      },
+      {
+        "name": "Organovo",
+        "context": "Organovo leverages AI in regenerative medicine to improve the efficacy and scalability of regenerative therapies.",
+        "sources": [
+          {
+            "url": "https://www.forbes.com/councils/forbesbusinesscouncil/2024/06/24/emerging-trends-in-ai-in-biotech/",
+            "title": "Emerging Trends In AI In Biotech - Forbes"
+          }
+        ]
+      },
+      {
+        "name": "Flatiron Health",
+        "context": "Flatiron Health is working on integrating diverse datasets to provide a holistic view of patient health, enhancing AI-driven solutions in biotech.",
+        "sources": [
+          {
+            "url": "https://www.forbes.com/councils/forbesbusinesscouncil/2024/06/24/emerging-trends-in-ai-in-biotech/",
+            "title": "Emerging Trends In AI In Biotech - Forbes"
+          }
+        ]
+      },
+      {
+        "name": "Novartis",
+        "context": "Novartis' CAR-T therapy, Kymriah, received FDA accelerated approval by integrating real-world evidence with clinical trials data.",
+        "sources": [
+          {
+            "url": "https://www.forbes.com/councils/forbesbusinesscouncil/2024/06/24/emerging-trends-in-ai-in-biotech/",
+            "title": "Emerging Trends In AI In Biotech - Forbes"
+          }
+        ]
+      },
+      {
+        "name": "IBM Watson Health",
+        "context": "IBM Watson Health has formed strategic alliances with academic medical centers to enhance AI-driven healthcare solutions.",
+        "sources": [
+          {
+            "url": "https://www.forbes.com/councils/forbesbusinesscouncil/2024/06/24/emerging-trends-in-ai-in-biotech/",
+            "title": "Emerging Trends In AI In Biotech - Forbes"
+          }
+        ]
+      },
+      {
+        "name": "Google Health",
+        "context": "Google Health is known for its commitment to ethical AI practices, enhancing its reputation and market acceptance.",
+        "sources": [
+          {
+            "url": "https://www.forbes.com/councils/forbesbusinesscouncil/2024/06/24/emerging-trends-in-ai-in-biotech/",
+            "title": "Emerging Trends In AI In Biotech - Forbes"
+          }
+        ]
+      },
+      {
+        "name": "Microsoft",
+        "context": "Microsoft is recognized for its commitment to ethical AI practices, which enhances its reputation and market acceptance.",
+        "sources": [
+          {
+            "url": "https://www.forbes.com/councils/forbesbusinesscouncil/2024/06/24/emerging-trends-in-ai-in-biotech/",
+            "title": "Emerging Trends In AI In Biotech - Forbes"
+          }
+        ]
+      },
+      {
+        "name": "McKinsey",
+        "context": "McKinsey's life-sciences experts discuss the transformative effects of AI, data, and analytics on drug discovery.",
+        "sources": [
+          {
+            "url": "https://www.mckinsey.com/featured-insights/the-next-normal/biotech",
+            "title": "The future of biotech: AI-driven drug discovery | McKinsey & Company"
+          }
+        ]
+      }
+    ],
+    "whitespace_opportunities": [
+      {
+        "description": "Need for faster and more accurate methods to determine protein structures.",
+        "sources": [
+          {
+            "url": "https://biotechnology.georgetown.edu/news/the-future-of-artificial-intelligence-and-biotechnology/",
+            "title": "The Future of Artificial Intelligence and Biotechnology"
+          }
+        ]
+      },
+      {
+        "description": "Personalized medicine approaches for mental health treatment.",
+        "sources": [
+          {
+            "url": "https://biotechnology.georgetown.edu/news/the-future-of-artificial-intelligence-and-biotechnology/",
+            "title": "The Future of Artificial Intelligence and Biotechnology"
+          }
+        ]
+      },
+      {
+        "description": "Integration of AI in identifying drug targets for orphan diseases.",
+        "sources": [
+          {
+            "url": "https://biotechnology.georgetown.edu/news/the-future-of-artificial-intelligence-and-biotechnology/",
+            "title": "The Future of Artificial Intelligence and Biotechnology"
+          }
+        ]
+      },
+      {
+        "description": "There is a need for seamless data integration and interoperability in healthcare to enhance AI-driven insights.",
+        "sources": [
+          {
+            "url": "https://www.forbes.com/councils/forbesbusinesscouncil/2024/06/24/emerging-trends-in-ai-in-biotech/",
+            "title": "Emerging Trends In AI In Biotech - Forbes"
+          }
+        ]
+      },
+      {
+        "description": "The development of scalable AI solutions that can be easily integrated into existing healthcare infrastructures is a market opportunity.",
+        "sources": [
+          {
+            "url": "https://www.forbes.com/councils/forbesbusinesscouncil/2024/06/24/emerging-trends-in-ai-in-biotech/",
+            "title": "Emerging Trends In AI In Biotech - Forbes"
+          }
+        ]
+      },
+      {
+        "description": "Need for radical changes in company workflows to integrate AI effectively in drug discovery",
+        "sources": [
+          {
+            "url": "https://www.mckinsey.com/featured-insights/the-next-normal/biotech",
+            "title": "The future of biotech: AI-driven drug discovery | McKinsey & Company"
+          }
+        ]
+      },
+      {
+        "description": "Lack of cures for many diseases due to the lengthy and expensive drug discovery process",
+        "sources": [
+          {
+            "url": "https://www.mckinsey.com/featured-insights/the-next-normal/biotech",
+            "title": "The future of biotech: AI-driven drug discovery | McKinsey & Company"
+          }
+        ]
+      }
+    ]
+  }
