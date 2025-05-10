@@ -12,7 +12,9 @@ from pathlib import Path
 import requests
 import streamlit as st
 
-from gtmind.persistence import list_saved_reports
+from gtmind.persistence import list_saved_reports, save_report
+from gtmind.core.models import ResearchReport
+
 
 # ------------------------------------------------------------------------- #
 # Config defaults (can override via env vars)
@@ -27,6 +29,8 @@ st.title("🔎 GTMind Research Agent")
 # Sidebar – choose DB, then recent reports
 # ------------------------------------------------------------------------- #
 st.sidebar.header("📚 Saved Reports")
+save_enabled = st.sidebar.checkbox("📝 Auto-save report to DB", value=True)
+
 
 db_path = Path(DEFAULT_DB).expanduser()
 
@@ -61,6 +65,11 @@ if run_btn and query_input.strip():
     if resp.status_code == 200:
         data = resp.json()
         st.success("Done! Scroll for insights.")
+        if save_enabled:
+            report = ResearchReport.model_validate(data)
+            row_id = save_report(report, db_path)
+            st.sidebar.success(f"💾 Saved to DB (ID: {row_id})")
+            st.experimental_rerun()
     else:
         st.error(f"Backend error {resp.status_code}: {resp.text[:200]}")
 
