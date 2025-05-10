@@ -4,6 +4,7 @@ import itertools
 import logging
 
 from rapidfuzz import fuzz, process
+from gtmind.core.settings import settings
 
 from gtmind.core.models import (
     Company,
@@ -20,7 +21,7 @@ logger = logging.getLogger(__name__)
 
 
 def _dedupe_strings(
-    texts: list[tuple[str, SourceRef]], threshold: int = 75
+    texts: list[tuple[str, SourceRef]], threshold: int = settings.dedupe_threshold
 ) -> dict[str, list[SourceRef]]:
     """
     Collapse near-duplicate strings using RapidFuzz token-sort ratio.

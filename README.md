@@ -73,7 +73,7 @@ OPENAI_API_KEY="sk-•••"
 SEARCH_API_KEY="serp_•••"
 ```
 
-These keys are required for the application to function properly.
+These keys are required for the application to function properly. Please do not commit these keys to Github.
 
 #### Start the Application
 
