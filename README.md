@@ -1,3 +1,4 @@
+
 # GTMind — Autonomous Research Agent 🔎
 
 > **From a single query to a structured, source‑linked research report.**  
@@ -5,7 +6,7 @@
 
 ---
 
-## ✨ What's inside?
+## ✨ What’s inside?
 
 | Layer | Module | Tech / Libs | Purpose |
 |-------|--------|-------------|---------|
@@ -13,11 +14,9 @@
 | **Parse**       | `core/parse.py`       | Async `httpx` · `trafilatura` | Download & boilerplate‑strip HTML |
 | **Extract**     | `core/extract.py`     | OpenAI GPT‑4o · function‑calling | Pull trends, companies, gaps |
 | **Aggregate**   | `core/aggregate.py`   | RapidFuzz · frequency rank    | De‑dupe & merge into a report |
-| **Persist**     | `persistence.py`      | SQLite · `sqlmodel`           | `--save-sqlite` flag, history sidebar |
+| **Persist**     | `persistence.py`      | SQLite · `sqlmodel`           | `--save-sqlite` for history |
 | **Serve**       | `api/run.py`          | FastAPI · Typer CLI           | `/report` JSON · `gtmind` CLI cmd |
-| **UI**          | `ui/app.py`           | Streamlit                     | Query box, green gaps, saved list |
-| **Tooling**     | Ruff · Mypy · Pytest  | 90 %+ coverage, pre‑commit hooks |
-| **Deploy**      | Dockerfile            | Uvicorn + Streamlit           | One image → prod‑ready |
+| **UI**          | `ui/app.py`           | Streamlit                     | Query box, saved list, two‑column companies |
 
 ---
 
@@ -25,8 +24,8 @@
 
 ```mermaid
 flowchart LR
-    Q(Query) --> S(SearchService)
-    S --> P[Downloader]
+    Q(Query) --> S(Search Service)
+    S --> P[Downloader + Trafilatura]
     P --> E[OpenAI Extractor]
     E --> A[Aggregator]
     A --> J[ResearchReport JSON]
@@ -47,136 +46,69 @@ flowchart LR
 
 ---
 
-## 🛠️ Installation
+## 🚀 Quick Start
 
-### Using Poetry (recommended)
+```markdown
+### Installation and Setup
 
-```bash
-git clone https://github.com/your-org/gtmind && cd gtmind
-make install                                # poetry deps + tools
-```
-
-### Manual Installation
+Clone the repository and install dependencies:
 
 ```bash
-git clone https://github.com/your-org/gtmind && cd gtmind
-python -m pip install -e .
+git clone https://github.com/amritkochar/GTMind.git && cd GTMind
+make install  # poetry deps + tools
 ```
 
-### Docker Installation
+#### Set Up Environment Variables
+
+Before running the application, ensure you have a `.env` file in the root directory. You can create one by copying the provided `.env.example` file:
 
 ```bash
-docker build -t gtmind .
-docker run -p 8000:8000 -p 8501:8501 -e OPENAI_API_KEY=sk-••• -e SEARCH_API_KEY=serp_••• gtmind
+cp .env.example .env
 ```
 
----
-
-## ⚙️ Configuration
-
-Create a `.env` file in the project root:
-
-```
-OPENAI_API_KEY=sk-•••
-SEARCH_API_KEY=serp_•••
-OPENAI_MODEL=gpt-4o           # Optional, defaults to gpt-4o
-MAX_SEARCH_RESULTS=10         # Optional, defaults to 10
-ENABLE_CACHING=true           # Optional, defaults to true
-```
-
-Or set environment variables directly:
+Then, open the `.env` file and add your API keys:
 
 ```bash
-export OPENAI_API_KEY=sk-•••
-export SEARCH_API_KEY=serp_•••
+OPENAI_API_KEY="sk-•••"
+SEARCH_API_KEY="serp_•••"
 ```
 
----
+These keys are required for the application to function properly.
 
-## 🚀 Quick Start
+#### Start the Application
+
+Run the following commands to start the backend and frontend services:
 
 ```bash
-make serve &                                # FastAPI at :8000
-make ui                                     # Streamlit at :8501
+make serve  # FastAPI on :8000
+make ui     # Streamlit on :8501
+```
 ```
 
-### CLI
+
+### CLI Example
 
 ```bash
-# Basic usage
-gtmind "AI in retail"
-
-# Save output to file
-gtmind "AI in retail" --out retail.json
-
-# Persist to database
-gtmind "AI in retail" --save-sqlite reports.db
-
-# Complete example with options
-gtmind "AI in retail" \
-       --out retail.json \
-       --save-sqlite reports.db \
-       --model gpt-4o \
-       --max-results 15
+poetry run gtmind run "AI in biotechnology" \
+    --out biotech.json \
+    --save-sqlite my.db
 ```
 
-### API
+### API Example
 
 ```
-# Basic query
 GET http://localhost:8000/report?q=AI+in+retail
-
-# With parameters
-GET http://localhost:8000/report?q=AI+in+retail&model=gpt-4o&max_results=15
 ```
 
-<details>
-<summary>Response (JSON)</summary>
+### UI Example
 
-```json
-{
-  "query": "AI in retail",
-  "trends": [
-    {"text": "AI-driven demand forecasting", "sources": [...]}
-  ],
-  "companies": [
-    {"name": "ForecastPro", "context": "", "sources": [...]}
-  ],
-  "whitespace_opportunities": [
-    {"description": "Tier-2 retailers lack AI tools", "sources": [...]}
-  ]
-}
 ```
-</details>
-
-### UI
-
-```bash
 streamlit run src/gtmind/ui/app.py
 ```
 
-#### UI Features
-* 2‑column companies  
-* Green‑highlighted whitespace gaps  
-* Sidebar of most‑recent reports (SQLite)
-* Source linking for every insight
-
----
-
-## 🧩 How It Works
-
-1. **Search**: Your query is sent to Serper.dev (Google-style search) to find relevant articles
-2. **Parse**: Articles are downloaded and cleaned using trafilatura to remove boilerplate
-3. **Extract**: GPT-4o analyzes the content to identify trends, companies, and market gaps
-4. **Aggregate**: Similar findings are merged and ranked by frequency and relevance
-5. **Present**: Results are formatted as a structured research report available via CLI, API, or UI
-
-### Example Use Cases
-
-- **Market Research**: "AI startups in healthcare 2023"
-- **Competitive Analysis**: "Shopify alternatives for SaaS businesses"
-- **Trend Spotting**: "Emerging technologies in renewable energy"
-- **Gap Analysis**: "Underserved segments in online education"
+* 🔹 Two‑column company list  
+* 🟢 Green‑highlighted whitespace gaps  
+* 📚 Sidebar of most‑recent reports (reads SQLite)
 
 ---
 
@@ -185,15 +117,8 @@ streamlit run src/gtmind/ui/app.py
 ```
 src/gtmind/
 ├─ core/                # search, parse, extract, aggregate
-│  ├─ search.py         # Serper.dev integration
-│  ├─ parse.py          # HTML processing & cleaning
-│  ├─ extract.py        # GPT-4o analysis
-│  └─ aggregate.py      # Result deduplication & ranking
 ├─ api/                 # FastAPI + Typer CLI
-│  ├─ run.py            # API server entry point
-│  └─ cli.py            # Command line interface
 ├─ ui/                  # Streamlit front‑end
-│  └─ app.py            # UI components & logic
 ├─ persistence.py       # SQLite helpers
 ├─ sample_outputs/      # example JSON reports
 └─ tests/               # unit + integration
@@ -201,56 +126,32 @@ src/gtmind/
 
 ---
 
-## ❓ Troubleshooting
+## 📂 Sample Outputs
 
-### Common Issues
+Real JSON examples live in [`sample_outputs/`](sample_outputs):
 
-- **API Key Invalid**: Ensure your OpenAI and Serper.dev keys are correctly set in env vars
-- **Rate Limiting**: If you encounter "429 Too Many Requests", implement exponential backoff or upgrade your API plan
-- **Missing Results**: Try increasing the `--max-results` parameter for broader coverage
-- **SQLite Errors**: Check file permissions if using `--save-sqlite`
-
-### Logs
-
-Enable debug logging:
-
-```bash
-export GTMIND_LOG_LEVEL=DEBUG
-gtmind "your query"
-```
+* `ai_in_retail.json`
+* `ai_in_healthcare.json`
 
 ---
 
 ## 🛣 Future Roadmap
 
 * 🔎 Vector cache of article embeddings for faster re‑runs  
-* ✨ RAG enrichment for deeper summaries  
-* 💾 Postgres adapter for multi‑user persistence  
-* 🌐 OAuth‑guarded web UI & shareable URLs  
-* 🤖 Scheduled cron search with email digests  
+* ✨ RAG enrichment for deeper summaries 
+* 🌐 OAuth‑guarded web UI & shareable URLs
+* 🤖 Scheduled cron search with email digests
+* 🐳 Docker container & CI pipeline
 
 ---
 
 ## 🤝 Contributing
 
 ```bash
-make check   # ruff + mypy
-make test    # pytest
+make check   # lint (ruff) + type‑check (mypy)
+make test    # run pytest
 ```
 
-### Contribution Guidelines
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature-name`
-3. Make your changes and add tests
-4. Run the checks: `make check && make test`
-5. Submit a pull request
-
-Pull requests welcome — please keep CI green! 🎉
+Pull requests welcome — please keep tests green! 🎉
 
 ---
-
-## 📜 License
-
-[MIT](LICENSE)  
-© 2025 Amrit Kochar & contributors
