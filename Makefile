@@ -17,7 +17,7 @@ check-fix:
 	poetry run ruff check src tests --fix
 
 test:
-	poetry run pytest -q --tb=short --disable-warnings
+	poetry run pytest --tb=short --disable-warnings
 
 coverage:
 	poetry run coverage run -m pytest
