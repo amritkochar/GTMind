@@ -93,8 +93,8 @@ streamlit run src/gtmind/ui/app.py
 ### CLI Example (runs in sync)
 
 ```bash
-poetry run gtmind run "AI in biotechnology" \
-    --out biotech.json \
+poetry run gtmind run "AI in retail" \
+    --out sample_output.json \
     --save-sqlite research.db
 ```
 
