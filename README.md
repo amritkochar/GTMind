@@ -135,6 +135,8 @@ Real JSON examples live in [`sample_outputs/`](sample_outputs):
 
 ## 🛣 Future Roadmap
 
+* 🧠 Build evals to ensure good quality data is only used to prepare reports
+* 🚧 Build guardrails to ensure consistent pipeline outputs, avoid useless usage of LLM
 * 🔎 Vector cache of article embeddings for faster re‑runs  
 * ✨ RAG enrichment for deeper summaries 
 * 🌐 OAuth‑guarded web UI & shareable URLs

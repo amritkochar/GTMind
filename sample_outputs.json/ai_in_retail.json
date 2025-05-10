@@ -2,7 +2,7 @@
   "query": "AI in retail",
   "trends": [
     {
-      "text": "AI-driven personalization is becoming essential for retail success, catering to digitally savvy shoppers with changing preferences.",
+      "text": "AI is becoming a strategic partner in retail, helping to optimize operations and enhance customer experience.",
       "sources": [
         {
           "url": "https://www.forbes.com/sites/sap/2024/04/19/artificial-intelligence-in-retail-6-use-cases-and-examples/",
@@ -11,7 +11,7 @@
       ]
     },
     {
-      "text": "Retailers are increasingly adopting AI for strategic analytics and forecasting to navigate economic and geopolitical challenges.",
+      "text": "By 2025, 80% of retail executives expect to use intelligent automation technologies, with 40% already using some form of it.",
       "sources": [
         {
           "url": "https://www.forbes.com/sites/sap/2024/04/19/artificial-intelligence-in-retail-6-use-cases-and-examples/",
@@ -20,7 +20,7 @@
       ]
     },
     {
-      "text": "By 2025, a significant majority of retail executives expect to use intelligent automation technologies.",
+      "text": "AI is crucial for personalization in retail, enabling tailored, instant, and effortless shopping experiences.",
       "sources": [
         {
           "url": "https://www.forbes.com/sites/sap/2024/04/19/artificial-intelligence-in-retail-6-use-cases-and-examples/",
@@ -38,7 +38,7 @@
       ]
     },
     {
-      "text": "AI is being leveraged for operational efficiency, including supply chain optimization and fraud detection, to reduce costs and improve productivity.",
+      "text": "AI is being leveraged for predictive analytics in demand forecasting, optimizing inventory management and reducing stockouts or overstock situations.",
       "sources": [
         {
           "url": "https://www.apu.apus.edu/area-of-study/business-and-management/resources/artificial-intelligence-in-retail-and-improving-efficiency/",
@@ -47,7 +47,7 @@
       ]
     },
     {
-      "text": "Retailers are increasingly using AI for dynamic pricing and predictive analytics to optimize inventory management and demand forecasting.",
+      "text": "AI-powered surveillance and fraud detection systems are increasingly used to enhance security and reduce losses in retail.",
       "sources": [
         {
           "url": "https://www.apu.apus.edu/area-of-study/business-and-management/resources/artificial-intelligence-in-retail-and-improving-efficiency/",
@@ -56,7 +56,7 @@
       ]
     },
     {
-      "text": "AI-driven personalization and hyperpersonalization in retail",
+      "text": "AI-driven personalization in retail enhances customer experience and increases loyalty.",
       "sources": [
         {
           "url": "https://www.ibm.com/think/topics/ai-in-retail",
@@ -65,7 +65,7 @@
       ]
     },
     {
-      "text": "Integration of AI in backend operations and supply chain management",
+      "text": "Generative AI is transforming content generation and real-time customer engagement in retail.",
       "sources": [
         {
           "url": "https://www.ibm.com/think/topics/ai-in-retail",
@@ -74,7 +74,7 @@
       ]
     },
     {
-      "text": "AI-powered demand forecasting and fraud prevention",
+      "text": "AI technologies are optimizing backend operations like inventory and supply chain management.",
       "sources": [
         {
           "url": "https://www.ibm.com/think/topics/ai-in-retail",
@@ -83,7 +83,34 @@
       ]
     },
     {
-      "text": "Retailers are increasingly experimenting with generative AI to enhance internal operations and customer experiences.",
+      "text": "AI is transforming retail operations by enhancing data analytics for inventory management, marketing, and customer service.",
+      "sources": [
+        {
+          "url": "https://www.oracle.com/retail/ai-retail/",
+          "title": "10 Examples of How Retailers Use AI - Oracle"
+        }
+      ]
+    },
+    {
+      "text": "Retailers are using AI to overcome labor shortages and improve customer satisfaction through autonomous digital assistants and personalized recommendations.",
+      "sources": [
+        {
+          "url": "https://www.oracle.com/retail/ai-retail/",
+          "title": "10 Examples of How Retailers Use AI - Oracle"
+        }
+      ]
+    },
+    {
+      "text": "AI is enabling retailers to optimize pricing strategies and product assortments, thereby increasing profitability despite narrow margins.",
+      "sources": [
+        {
+          "url": "https://www.oracle.com/retail/ai-retail/",
+          "title": "10 Examples of How Retailers Use AI - Oracle"
+        }
+      ]
+    },
+    {
+      "text": "Retailers are increasingly piloting and scaling generative AI (gen AI) use cases to enhance internal operations and customer experience.",
       "sources": [
         {
           "url": "https://www.mckinsey.com/industries/retail/our-insights/llm-to-roi-how-to-scale-gen-ai-in-retail",
@@ -92,7 +119,7 @@
       ]
     },
     {
-      "text": "There is a growing focus on using generative AI to personalize customer interactions and streamline decision-making processes.",
+      "text": "Gen AI is expected to unlock significant economic value for retailers, potentially increasing industry margins by 1.2 to 1.9 percentage points.",
       "sources": [
         {
           "url": "https://www.mckinsey.com/industries/retail/our-insights/llm-to-roi-how-to-scale-gen-ai-in-retail",
@@ -101,11 +128,38 @@
       ]
     },
     {
-      "text": "Retailers are adopting different archetypes (taker, shaper, maker) to integrate generative AI, with most opting for the 'shaper' model to customize existing tools.",
+      "text": "Retailers are adopting different archetypes (taker, shaper, maker) for implementing gen AI, with most opting for the 'shaper' archetype to customize existing tools.",
       "sources": [
         {
           "url": "https://www.mckinsey.com/industries/retail/our-insights/llm-to-roi-how-to-scale-gen-ai-in-retail",
           "title": "LLM to ROI: How to scale gen AI in retail - McKinsey & Company"
+        }
+      ]
+    },
+    {
+      "text": "AI is revolutionizing retail through technologies like computer vision, machine learning, and conversational AI to enhance customer experience and operational efficiency.",
+      "sources": [
+        {
+          "url": "https://www.intel.com/content/www/us/en/learn/ai-in-retail.html",
+          "title": "Artificial Intelligence (AI) in Retail \u2013 Intel"
+        }
+      ]
+    },
+    {
+      "text": "Retailers are increasingly using AI to create frictionless shopping experiences and personalized customer interactions.",
+      "sources": [
+        {
+          "url": "https://www.intel.com/content/www/us/en/learn/ai-in-retail.html",
+          "title": "Artificial Intelligence (AI) in Retail \u2013 Intel"
+        }
+      ]
+    },
+    {
+      "text": "AI is being leveraged to improve demand forecasting, inventory management, and loss prevention in retail.",
+      "sources": [
+        {
+          "url": "https://www.intel.com/content/www/us/en/learn/ai-in-retail.html",
+          "title": "Artificial Intelligence (AI) in Retail \u2013 Intel"
         }
       ]
     }
@@ -113,7 +167,7 @@
   "companies": [
     {
       "name": "Amazon",
-      "context": "Amazon uses AI technologies for personalized customer recommendations and to manage reverse logistics and inventory systems.",
+      "context": "Excels in using AI technologies for personalized customer recommendations and managing reverse logistics and inventory systems.",
       "sources": [
         {
           "url": "https://www.apu.apus.edu/area-of-study/business-and-management/resources/artificial-intelligence-in-retail-and-improving-efficiency/",
@@ -131,7 +185,7 @@
     },
     {
       "name": "Sephora",
-      "context": "Sephora uses an AI tool called Virtual Artist to allow customers to try makeup products virtually, enhancing the online shopping experience.",
+      "context": "Uses an AI tool called Virtual Artist to enhance online shopping experiences by allowing customers to try makeup products virtually.",
       "sources": [
         {
           "url": "https://www.apu.apus.edu/area-of-study/business-and-management/resources/artificial-intelligence-in-retail-and-improving-efficiency/",
@@ -145,7 +199,7 @@
     },
     {
       "name": "SAP",
-      "context": "SAP is mentioned as a collaborator with Incisiv in providing a practical framework for using AI in the retail industry.",
+      "context": "SAP is mentioned as a collaborator with Incisiv to provide a practical framework for using AI in the retail industry.",
       "sources": [
         {
           "url": "https://www.forbes.com/sites/sap/2024/04/19/artificial-intelligence-in-retail-6-use-cases-and-examples/",
@@ -155,17 +209,7 @@
     },
     {
       "name": "Incisiv",
-      "context": "Incisiv, in partnership with SAP, offers a guidebook for using AI in retail, highlighting six key use cases.",
-      "sources": [
-        {
-          "url": "https://www.forbes.com/sites/sap/2024/04/19/artificial-intelligence-in-retail-6-use-cases-and-examples/",
-          "title": "Artificial Intelligence In Retail: 6 Use Cases And Examples - Forbes"
-        }
-      ]
-    },
-    {
-      "name": "Analytics Insight",
-      "context": "Analytics Insight provides statistics on the expected adoption of intelligent automation technologies by retail executives.",
+      "context": "Incisiv, in collaboration with SAP, provides a guidebook for using AI in retail through a new playbook.",
       "sources": [
         {
           "url": "https://www.forbes.com/sites/sap/2024/04/19/artificial-intelligence-in-retail-6-use-cases-and-examples/",
@@ -185,7 +229,7 @@
     },
     {
       "name": "Statista",
-      "context": "Statista analysis indicates that retailers using AI and machine learning outperform those that do not.",
+      "context": "Statista analysis indicates that retailers using AI and machine learning outperform those that don't.",
       "sources": [
         {
           "url": "https://www.forbes.com/sites/sap/2024/04/19/artificial-intelligence-in-retail-6-use-cases-and-examples/",
@@ -195,7 +239,7 @@
     },
     {
       "name": "Tractor Supply",
-      "context": "Tractor Supply uses AI within its supply chain, human resources, and sales and marketing activities to improve customer service, including an AI-powered tech assistant called 'Gura'.",
+      "context": "Utilizes AI within its supply chain, human resources, and sales and marketing activities to improve customer service.",
       "sources": [
         {
           "url": "https://www.apu.apus.edu/area-of-study/business-and-management/resources/artificial-intelligence-in-retail-and-improving-efficiency/",
@@ -205,7 +249,7 @@
     },
     {
       "name": "Walmart",
-      "context": "Walmart uses AI for demand forecasting and supply chain optimization, requiring a multiyear approach to develop flexible algorithms.",
+      "context": "Uses AI for demand forecasting to optimize inventory management and enhance supply chain workflows.",
       "sources": [
         {
           "url": "https://www.apu.apus.edu/area-of-study/business-and-management/resources/artificial-intelligence-in-retail-and-improving-efficiency/",
@@ -215,7 +259,7 @@
     },
     {
       "name": "H&M",
-      "context": "H&M leverages AI to optimize its supply chains, analyze trends, and forecast demand, aiding in fast fashion decisions and sustainability.",
+      "context": "Leverages AI to optimize supply chains, analyze trends, and forecast demand, enabling quick response to market changes.",
       "sources": [
         {
           "url": "https://www.apu.apus.edu/area-of-study/business-and-management/resources/artificial-intelligence-in-retail-and-improving-efficiency/",
@@ -225,7 +269,7 @@
     },
     {
       "name": "Alibaba",
-      "context": "Alibaba uses AI to analyze user behavior and identify potential fraudulent transactions, safeguarding the company and its customers.",
+      "context": "Uses AI to analyze user behavior and identify potential fraudulent transactions, safeguarding company and customer interests.",
       "sources": [
         {
           "url": "https://www.apu.apus.edu/area-of-study/business-and-management/resources/artificial-intelligence-in-retail-and-improving-efficiency/",
@@ -235,7 +279,7 @@
     },
     {
       "name": "Target",
-      "context": "Target invests in AI-based surveillance to minimize losses due to theft and enhance store safety.",
+      "context": "Invests in AI-based surveillance to minimize losses due to theft and enhance store safety.",
       "sources": [
         {
           "url": "https://www.apu.apus.edu/area-of-study/business-and-management/resources/artificial-intelligence-in-retail-and-improving-efficiency/",
@@ -245,7 +289,7 @@
     },
     {
       "name": "Tesco",
-      "context": "Tesco uses AI to analyze customer data and personalize promotions, increasing customer engagement and loyalty.",
+      "context": "Uses AI to analyze customer data and personalize promotions, increasing customer engagement and loyalty.",
       "sources": [
         {
           "url": "https://www.apu.apus.edu/area-of-study/business-and-management/resources/artificial-intelligence-in-retail-and-improving-efficiency/",
@@ -255,7 +299,7 @@
     },
     {
       "name": "Delta Air Lines",
-      "context": "Delta Air Lines uses AI algorithms for dynamic pricing to capture maximum value from transactions.",
+      "context": "Uses AI algorithms for dynamic pricing to capture maximum value from transactions.",
       "sources": [
         {
           "url": "https://www.apu.apus.edu/area-of-study/business-and-management/resources/artificial-intelligence-in-retail-and-improving-efficiency/",
@@ -264,8 +308,28 @@
       ]
     },
     {
+      "name": "McKinsey",
+      "context": "Reported that many executives struggle to implement AI technologies across their organizations.",
+      "sources": [
+        {
+          "url": "https://www.ibm.com/think/topics/ai-in-retail",
+          "title": "AI in Retail - IBM"
+        }
+      ]
+    },
+    {
+      "name": "IBM Institute for Business Value",
+      "context": "Reported that four in five consumers who haven't tried AI for shopping would like to use it.",
+      "sources": [
+        {
+          "url": "https://www.ibm.com/think/topics/ai-in-retail",
+          "title": "AI in Retail - IBM"
+        }
+      ]
+    },
+    {
       "name": "Netflix",
-      "context": "Mentioned as an example of a company using recommendation engines to suggest products based on user behavior, similar to large retailers like Amazon.",
+      "context": "Uses recommendation engines to suggest content based on user behavior, similar to retail personalization strategies.",
       "sources": [
         {
           "url": "https://www.ibm.com/think/topics/ai-in-retail",
@@ -275,7 +339,7 @@
     },
     {
       "name": "Wal-Mart",
-      "context": "Uses AI to optimize delivery vehicles, routing them efficiently and analyzing weather patterns to ensure timely delivery.",
+      "context": "Uses AI to optimize delivery vehicles and routing for efficient logistics.",
       "sources": [
         {
           "url": "https://www.ibm.com/think/topics/ai-in-retail",
@@ -285,7 +349,7 @@
     },
     {
       "name": "eBay",
-      "context": "Uses automated fraud detection software to flag potential issues in online transactions.",
+      "context": "Employs automated fraud detection software to enhance security.",
       "sources": [
         {
           "url": "https://www.ibm.com/think/topics/ai-in-retail",
@@ -294,8 +358,18 @@
       ]
     },
     {
+      "name": "Oracle",
+      "context": "Oracle Retail AI Foundation applications leverage AI and machine learning to help retailers optimize various operations, enhancing customer experience and boosting margins.",
+      "sources": [
+        {
+          "url": "https://www.oracle.com/retail/ai-retail/",
+          "title": "10 Examples of How Retailers Use AI - Oracle"
+        }
+      ]
+    },
+    {
       "name": "Mercado Libre",
-      "context": "Deployed generative AI 'copilots' to enhance productivity and satisfaction among development teams.",
+      "context": "Deployed gen AI 'copilots' to improve developer productivity and satisfaction by automating repetitive tasks.",
       "sources": [
         {
           "url": "https://www.mckinsey.com/industries/retail/our-insights/llm-to-roi-how-to-scale-gen-ai-in-retail",
@@ -305,7 +379,7 @@
     },
     {
       "name": "Lindex",
-      "context": "Released 'Lindex Copilot' to assist store employees with personalized advice and guidance on store operations.",
+      "context": "Released 'Lindex Copilot' to support store employees with personalized advice and guidance on store operations.",
       "sources": [
         {
           "url": "https://www.mckinsey.com/industries/retail/our-insights/llm-to-roi-how-to-scale-gen-ai-in-retail",
@@ -316,7 +390,7 @@
   ],
   "whitespace_opportunities": [
     {
-      "description": "There is a need for practical approaches and investments in both technology and people to maximize AI's impact in retail.",
+      "description": "Retailers need practical approaches to integrate AI effectively, focusing on areas where it can have the greatest impact.",
       "sources": [
         {
           "url": "https://www.forbes.com/sites/sap/2024/04/19/artificial-intelligence-in-retail-6-use-cases-and-examples/",
@@ -325,7 +399,7 @@
       ]
     },
     {
-      "description": "Retailers require a unified data ecosystem and infrastructure like RFID and IoT to advance AI capabilities from predictions to autonomous decision-making.",
+      "description": "There is a need for investment in infrastructures like RFID and IoT to achieve advanced AI capabilities in retail.",
       "sources": [
         {
           "url": "https://www.forbes.com/sites/sap/2024/04/19/artificial-intelligence-in-retail-6-use-cases-and-examples/",
@@ -334,7 +408,7 @@
       ]
     },
     {
-      "description": "There is a need for ethical guidelines and frameworks to address privacy concerns, algorithmic biases, and job displacement issues associated with AI in retail.",
+      "description": "There is a need for ethical guidelines and frameworks to address privacy concerns, algorithmic biases, and job displacement due to AI in retail.",
       "sources": [
         {
           "url": "https://www.apu.apus.edu/area-of-study/business-and-management/resources/artificial-intelligence-in-retail-and-improving-efficiency/",
@@ -343,7 +417,7 @@
       ]
     },
     {
-      "description": "Retailers could benefit from developing AI solutions that are more transparent and provide customers with control over their data collection and usage.",
+      "description": "Retailers could benefit from developing AI tools that not only enhance operational efficiency but also prioritize ethical considerations and consumer consent for data collection.",
       "sources": [
         {
           "url": "https://www.apu.apus.edu/area-of-study/business-and-management/resources/artificial-intelligence-in-retail-and-improving-efficiency/",
@@ -352,7 +426,7 @@
       ]
     },
     {
-      "description": "Large-scale and cost-effective deployment of AI technologies in retail",
+      "description": "Retailers struggle with large-scale and cost-effective deployment of AI technologies.",
       "sources": [
         {
           "url": "https://www.ibm.com/think/topics/ai-in-retail",
@@ -361,7 +435,7 @@
       ]
     },
     {
-      "description": "Improving AI implementation strategies across retail organizations",
+      "description": "There is a consumer interest in AI for shopping that is not fully met, as many have not yet tried it.",
       "sources": [
         {
           "url": "https://www.ibm.com/think/topics/ai-in-retail",
@@ -370,7 +444,7 @@
       ]
     },
     {
-      "description": "Enhancing AI-driven customer engagement tools for real-time interaction",
+      "description": "Advanced AI technologies for hyperpersonalization are not yet widely implemented across all retail sectors.",
       "sources": [
         {
           "url": "https://www.ibm.com/think/topics/ai-in-retail",
@@ -379,7 +453,25 @@
       ]
     },
     {
-      "description": "There is a need for more sector-specific generative AI solutions that can be customized to meet the unique needs of different retail segments.",
+      "description": "Retailers need solutions to better manage supply chain disruptions and ensure the availability of popular items.",
+      "sources": [
+        {
+          "url": "https://www.oracle.com/retail/ai-retail/",
+          "title": "10 Examples of How Retailers Use AI - Oracle"
+        }
+      ]
+    },
+    {
+      "description": "There is a need for AI tools that can further personalize customer interactions and improve visual search capabilities on retail websites.",
+      "sources": [
+        {
+          "url": "https://www.oracle.com/retail/ai-retail/",
+          "title": "10 Examples of How Retailers Use AI - Oracle"
+        }
+      ]
+    },
+    {
+      "description": "There is a need for more sector- and company-specific gen AI solutions, as many off-the-shelf tools do not fully meet retailers' needs.",
       "sources": [
         {
           "url": "https://www.mckinsey.com/industries/retail/our-insights/llm-to-roi-how-to-scale-gen-ai-in-retail",
@@ -388,11 +480,38 @@
       ]
     },
     {
-      "description": "Retailers require more affordable options for building and integrating foundation models, as current costs are prohibitive for many.",
+      "description": "Retailers require more personalized gen AI chatbots that can remember customer preferences and shopping habits to enhance the customer experience.",
       "sources": [
         {
           "url": "https://www.mckinsey.com/industries/retail/our-insights/llm-to-roi-how-to-scale-gen-ai-in-retail",
           "title": "LLM to ROI: How to scale gen AI in retail - McKinsey & Company"
+        }
+      ]
+    },
+    {
+      "description": "Retailers need to address responsible AI usage to maintain brand trust and customer loyalty.",
+      "sources": [
+        {
+          "url": "https://www.intel.com/content/www/us/en/learn/ai-in-retail.html",
+          "title": "Artificial Intelligence (AI) in Retail \u2013 Intel"
+        }
+      ]
+    },
+    {
+      "description": "There is a need for seamless integration of AI technologies with existing retail systems to optimize results and minimize disruption.",
+      "sources": [
+        {
+          "url": "https://www.intel.com/content/www/us/en/learn/ai-in-retail.html",
+          "title": "Artificial Intelligence (AI) in Retail \u2013 Intel"
+        }
+      ]
+    },
+    {
+      "description": "Retailers must ensure data privacy and security when implementing AI solutions to protect customer information.",
+      "sources": [
+        {
+          "url": "https://www.intel.com/content/www/us/en/learn/ai-in-retail.html",
+          "title": "Artificial Intelligence (AI) in Retail \u2013 Intel"
         }
       ]
     }
