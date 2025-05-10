@@ -48,7 +48,7 @@ flowchart LR
 
 ## 🚀 Quick Start
 
-```markdown
+
 ### Installation and Setup
 
 Clone the repository and install dependencies:
