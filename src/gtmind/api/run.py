@@ -15,7 +15,11 @@ from gtmind.core.aggregate import aggregate
 from gtmind.core.settings import settings
 from gtmind.core.models import ResearchReport
 
+from fastapi.middleware.cors import CORSMiddleware
+
+
 app = FastAPI(title="GTMind Research API", version="0.1.0")
+app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 cli = typer.Typer(pretty_exceptions_show_locals=False)
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 

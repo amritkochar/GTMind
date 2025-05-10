@@ -37,3 +37,6 @@ run:
 serve:
 	poetry run uvicorn gtmind.api.run:app --reload
 
+ui:
+	poetry run streamlit run src/gtmind/ui/app.py
+
