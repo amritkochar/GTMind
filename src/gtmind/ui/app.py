@@ -48,7 +48,7 @@ if recent_rows:
         return f"{r.id} · {r.query[:50]}"
     choice = st.sidebar.selectbox("Select a report:", recent_rows, format_func=label)
     selected_query = choice.query
-    loaded_data = json.loads(choice.json)
+    loaded_data = json.loads(choice.report_json)
     if not any([loaded_data.get("trends"), loaded_data.get("companies"), loaded_data.get("whitespace_opportunities")]):
         st.warning("This report contains no insights. Try refining your query.")
         st.stop()
@@ -91,11 +91,15 @@ if not data:
 # Render sections
 # ------------------------------------------------------------------------- #
 st.subheader("🚀 Key Trends")
+left, right = st.columns(2)
+cols = itertools.cycle([left, right])
 for t in data["trends"]:
-    st.markdown(f"**• {t['text']}**")
-    with st.expander("Sources"):
-        for s in t["sources"]:
-            st.markdown(f"- [{s['title'] or s['url']}]({s['url']})", unsafe_allow_html=True)
+    col = next(cols)
+    with col:
+        st.markdown(f"**• {t['text']}**")
+        with st.expander("Sources"):
+            for s in t["sources"]:
+                st.markdown(f"- [{s['title'] or s['url']}]({s['url']})", unsafe_allow_html=True)
 
 st.divider()
 
