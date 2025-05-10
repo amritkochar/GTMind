@@ -1,3 +1,4 @@
+# src/gtmind/api/run.py
 from __future__ import annotations
 
 import json
@@ -6,73 +7,52 @@ from pathlib import Path
 
 import typer
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
-from gtmind.core.search import search_sync
-from gtmind.core.parse import batch_fetch_clean_sync
-from gtmind.core.extract import batch_extract_sync
 from gtmind.core.aggregate import aggregate
-from gtmind.core.settings import settings
+from gtmind.core.extract import batch_extract_sync
 from gtmind.core.models import ResearchReport
+from gtmind.core.parse import batch_fetch_clean_sync
+from gtmind.core.search import search_sync
+from gtmind.persistence import save_report
 
-from fastapi.middleware.cors import CORSMiddleware
-
-
+# -----------------------------------------------------------------------------
+# FastAPI app
+# -----------------------------------------------------------------------------
 app = FastAPI(title="GTMind Research API", version="0.1.0")
-app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# -----------------------------------------------------------------------------
+# Typer CLI setup
+# -----------------------------------------------------------------------------
 cli = typer.Typer(pretty_exceptions_show_locals=False)
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
 
+# -----------------------------------------------------------------------------
+# Pipeline helpers
+# -----------------------------------------------------------------------------
 def _pipeline(query: str) -> ResearchReport:
     urls = search_sync(query)
-    logging.info("🔍 Search returned %s URLs", len(urls))
+    logging.info("🔍  Search returned %s URLs", len(urls))
 
     docs = batch_fetch_clean_sync(urls)
-    logging.info("📄 Parsed %s docs with extractable text", len(docs))
+    logging.info("📄  Parsed %s docs with extractable text", len(docs))
 
     extracts = batch_extract_sync(docs)
-    logging.info("🤖 LLM extracted insights from %s docs", len(extracts))
+    logging.info("🤖  LLM extracted insights from %s docs", len(extracts))
 
-    report = aggregate(query, extracts)
-    return report
-
-
-# ---------------------- Typer CLI ---------------------------------------- #
-@cli.command()
-def run(
-    query: str = typer.Argument(..., help="Search query, e.g. 'AI in retail'"),
-    out: Path | None = typer.Option(None, help="Save JSON to this file"),
-):
-    """Run full pipeline from search to final JSON report."""
-    report = _pipeline(query)
-    data = report.model_dump()
-
-    if out:
-        out.write_text(json.dumps(data, indent=2), encoding="utf-8")
-        typer.echo(f"✅ Report saved to {out}")
-    else:
-        typer.echo(json.dumps(data, indent=2))
-
-
-@cli.command()
-def version():
-    """Print package version."""
-    import importlib.metadata as importlib_metadata
-
-    print(importlib_metadata.version("gtmind"))
-
-
-# ---------------------- FastAPI endpoint --------------------------------- #
-@app.get("/report")
-async def get_report(q: str):
-    """GET /report?q=AI+in+retail"""
-    report = await _async_pipeline(q)
-    return JSONResponse(content=report.model_dump())
+    return aggregate(query, extracts)
 
 
 async def _async_pipeline(query: str) -> ResearchReport:
-    """Async variant used by FastAPI (keeps same steps)."""
+    """Async variant for FastAPI (non-blocking)."""
     from gtmind.core.search import search
     from gtmind.core.parse import batch_fetch_clean
     from gtmind.core.extract import batch_extract
@@ -83,5 +63,56 @@ async def _async_pipeline(query: str) -> ResearchReport:
     return aggregate(query, extracts)
 
 
+# -----------------------------------------------------------------------------
+# Typer commands
+# -----------------------------------------------------------------------------
+@cli.command()
+def run(
+    query: str = typer.Argument(..., help="Search query (e.g. 'AI in retail')"),
+    out: Path | None = typer.Option(None, help="Write pretty JSON to this path"),
+    save_sqlite: Path | None = typer.Option(
+        None, help="Persist report into this SQLite DB (creates if absent)"
+    ),
+):
+    """Execute full pipeline and optionally save results."""
+    report = _pipeline(query)
+    data = report.model_dump()
+
+    # save pretty JSON file
+    if out:
+        out.write_text(json.dumps(data, indent=2), encoding="utf-8")
+        typer.echo(f"✅ JSON saved to {out}")
+
+    # persist to SQLite
+    if save_sqlite:
+        row_id = save_report(report, save_sqlite)
+        typer.echo(f"💾 Stored in {save_sqlite} (row id {row_id})")
+
+    # default: print to stdout if no --out flag
+    if not out:
+        typer.echo(json.dumps(data, indent=2))
+
+
+@cli.command()
+def version():
+    """Print installed package version."""
+    import importlib.metadata as importlib_metadata
+
+    typer.echo(importlib_metadata.version("gtmind"))
+
+
+# -----------------------------------------------------------------------------
+# FastAPI route
+# -----------------------------------------------------------------------------
+@app.get("/report")
+async def get_report(q: str):
+    """HTTP: /report?q=AI+in+retail"""
+    report = await _async_pipeline(q)
+    return JSONResponse(content=report.model_dump())
+
+
+# -----------------------------------------------------------------------------
+# Entrypoint
+# -----------------------------------------------------------------------------
 if __name__ == "__main__":
     cli()
