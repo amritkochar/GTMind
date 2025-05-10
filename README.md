@@ -84,7 +84,13 @@ make serve  # FastAPI on :8000
 make ui     # Streamlit on :8501
 ```
 
-### CLI Example
+### UI Example (recommended)
+
+```
+streamlit run src/gtmind/ui/app.py
+```
+
+### CLI Example (runs in sync)
 
 ```bash
 poetry run gtmind run "AI in biotechnology" \
@@ -92,16 +98,10 @@ poetry run gtmind run "AI in biotechnology" \
     --save-sqlite my.db
 ```
 
-### API Example
+### API Example (runs async)
 
 ```
 GET http://localhost:8000/report?q=AI+in+retail
-```
-
-### UI Example
-
-```
-streamlit run src/gtmind/ui/app.py
 ```
 
 * 🔹 Two‑column company list  
