@@ -30,3 +30,10 @@ clean:
 
 format:
 	poetry run ruff format src tests
+
+run:
+	poetry run python -m gtmind.api.run run "$(q)"  # usage: make run q="AI in retail"
+
+serve:
+	poetry run uvicorn gtmind.api.run:app --reload
+
