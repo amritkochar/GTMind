@@ -13,7 +13,7 @@ class AppSettings(BaseSettings):
     search_api_key: str = Field(..., alias="SEARCH_API_KEY")
     search_provider: str = Field(default="serper")
     model: str = Field(default="gpt-4o")
-    max_docs: int = Field(default=5)
+    max_docs: int = Field(default=10)
     dedupe_threshold : int = Field(default=75)
     
     # Concurrency limits

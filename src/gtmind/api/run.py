@@ -43,6 +43,9 @@ def _pipeline(query: str) -> ResearchReport:
     logging.info("🔍  Search returned %s URLs", len(urls))
 
     docs = batch_fetch_clean_sync(urls)
+    if not docs:
+        raise RuntimeError(f"No clean content found for '{query}' — check your query or sources.")
+
     logging.info("📄  Parsed %s docs with extractable text", len(docs))
 
     extracts = batch_extract_sync(docs)

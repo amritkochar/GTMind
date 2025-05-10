@@ -29,7 +29,13 @@ async def _download(url: str, client: httpx.AsyncClient) -> str:
         resp.raise_for_status()
         return resp.text
     except (httpx.HTTPError, httpx.TimeoutException) as exc:
+        status = getattr(exc.response, "status_code", None)
+        if status in {401, 403}:
+            logger.warning("Blocked by site (%s): %s", status, url)
+        else:
+            logger.warning("Failed to fetch %s: %s", url, exc)
         raise FetchError(f"Failed to fetch {url}: {exc}") from exc
+
 
 
 def _clean_html(html: str) -> str | None:
@@ -56,6 +62,10 @@ async def fetch_and_clean(source: SourceRef) -> CleanDocument | None:
 
 
 async def batch_fetch_clean(sources: list[SourceRef]) -> list[CleanDocument]:
+    if not sources:
+        logger.warning("batch_fetch_clean() called with empty sources")
+        return []
+
     """Parallel fetch/clean with concurrency cap."""
     sem = asyncio.Semaphore(settings.fetch_concurrency_limit)  # limit inflight requests
 

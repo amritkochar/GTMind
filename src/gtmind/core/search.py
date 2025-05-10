@@ -40,7 +40,8 @@ async def search(query: str) -> list[SourceRef]:
     results: list[SourceRef] = [
         SourceRef(url=hit["link"], title=hit.get("title")) for hit in hits
     ]
-    logger.info("search(%s) -> %s hits", query, len(results))
+    if not results:
+        logger.warning("No search results returned for query: %s", query)
     return results
 
 
