@@ -1,9 +1,11 @@
 from __future__ import annotations
+import re
+import unicodedata
 from collections import defaultdict
 import itertools
 import logging
-
-from rapidfuzz import fuzz, process
+from typing import Dict, List, Tuple
+from rapidfuzz import fuzz
 from gtmind.core.settings import settings
 
 from gtmind.core.models import (
@@ -20,50 +22,67 @@ logger = logging.getLogger(__name__)
 # --------------------------- helpers ------------------------------------ #
 
 
+
+
+
+
+
+
+# ---------- helper -------------------------------------------------------- #
+_STOPWORDS = {
+    "ai", "the", "a", "an", "of", "in", "on", "with", "for", "and", "to",
+}
+
+_punct_re = re.compile(r"[^\w\s]")
+_ws_re = re.compile(r"\s+")
+
+
+def _normalize(text: str) -> str:
+    """
+    Crude normaliser:
+    - Unicode NFKD
+    - strip punctuation
+    - lower-case
+    - remove common stop-words
+    - singularise naive plurals (trailing 's')
+    """
+    txt = unicodedata.normalize("NFKD", text)
+    txt = _punct_re.sub(" ", txt)
+    tokens = [t.lower().rstrip("s") for t in _ws_re.split(txt) if t]
+    tokens = [t for t in tokens if t not in _STOPWORDS]
+    return " ".join(tokens)
+
+
+# ---------- de-dupe v2 ---------------------------------------------- #
+
 def _dedupe_strings(
-    texts: list[tuple[str, SourceRef]], threshold: int = settings.dedupe_threshold
-) -> dict[str, list[SourceRef]]:
+    texts: List[Tuple[str, SourceRef]],
+    threshold: int = settings.dedupe_threshold,
+) -> Dict[str, List[SourceRef]]:
     """
-    Collapse near-duplicate strings using RapidFuzz token-sort ratio.
-    Returns {canonical_text: [sources]}.
+    Collapse near-duplicate strings using RapidFuzz token-sort ratio on
+    *normalized* text. Returns {canonical_text: [sources]}.
     """
-    buckets: dict[str, list[SourceRef]] = {}
+    buckets: Dict[str, List[SourceRef]] = {}
+    norm_cache: Dict[str, str] = {}  # canonical_text -> normalized form
 
-    for text, src in texts:
-        text_norm = text.lower()
+    for raw_text, src in texts:
+        norm = _normalize(raw_text)
 
-        match = process.extractOne(
-            text_norm,
-            buckets.keys(),
-            scorer=fuzz.token_sort_ratio,
-            score_cutoff=threshold,
-        )
-        key = match[0] if match else text
+        # Find best existing bucket by fuzzy match on normalized strings
+        best_key = None
+        best_score = 0
+        for canon, canon_norm in norm_cache.items():
+            score = fuzz.token_sort_ratio(norm, canon_norm)
+            if score >= threshold and score > best_score:
+                best_key, best_score = canon, score
+
+        key = best_key or raw_text  # use existing bucket or create new one
         buckets.setdefault(key, []).append(src)
+        norm_cache.setdefault(key, norm)  # store norm for future comparisons
 
     return buckets
 
-
-
-def _merge_company_context(
-    companies: list[tuple[str, SourceRef]]
-) -> tuple[dict[str, list[SourceRef]], dict[str, str]]:
-    """
-    Dedupe companies by lowercased name, but preserve original casing separately.
-    Returns: (buckets, display_names)
-    """
-    buckets: dict[str, list[SourceRef]] = {}
-    display_names: dict[str, str] = {}
-
-    for name, src in companies:
-        key = name.lower()
-        if key not in buckets:
-            display_names[key] = name  # preserve original case
-            buckets[key] = [src]
-        else:
-            buckets[key].append(src)
-
-    return buckets, display_names
 
 
 # --------------------------- public API ---------------------------------- #
@@ -109,12 +128,16 @@ def aggregate(query: str, docs: list[DocumentExtraction]) -> ResearchReport:
 
     # --- build models -------------------------------------------------------
     def _bucket_to_trend(text: str, sources: list[SourceRef]) -> Trend:
-        return Trend(text=text, sources=sources)
+        uniq = {s.url: s for s in sources}.values()   # dedupe identical URLs
+        return Trend(text=text, sources=list(uniq))
+
 
     def _bucket_to_gap(text: str, sources: list[SourceRef]) -> WhitespaceOpportunity:
+        uniq = {s.url: s for s in sources}.values()   # dedupe identical URLs
         return WhitespaceOpportunity(description=text, sources=sources)
 
     def _bucket_to_company(key: str, sources: list[SourceRef]) -> Company:
+        uniq = {s.url: s for s in sources}.values()   # dedupe identical URLs
         return Company(
             name=display_names[key],
             context=context_map.get(key, ""),
@@ -136,6 +159,10 @@ def aggregate(query: str, docs: list[DocumentExtraction]) -> ResearchReport:
         key=lambda g: len(g.sources),
         reverse=True,
     )
+    
+    for k, v in trend_buckets.items():
+        logger.debug("%s appears in %d sources", k, len(v))
+
 
     return ResearchReport(
         query=query,
