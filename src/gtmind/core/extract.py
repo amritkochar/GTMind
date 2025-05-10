@@ -57,7 +57,10 @@ async def extract_document(doc: CleanDocument) -> DocumentExtraction | None:
 
     return DocumentExtraction(
         doc_source=source,
-        trends=[Trend(text=t, sources=[source]) for t in data["trends"]],
+        trends=[
+            Trend(text=t, sources=[source])
+            for t in data["trends"][:3]  # ⬅️ cap here
+        ],
         companies=[
             Company(name=c["name"], context=c["context"], sources=[source])
             for c in data["companies"]

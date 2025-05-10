@@ -39,7 +39,7 @@ EXTRACTION_TOOL_SCHEMA = {
 EXTRACTION_SYSTEM_PROMPT = (
     "You are a focused industry research agent. Your job is to extract structured insights from articles.\n\n"
     "For each article, extract the following:\n"
-    "1. Up to 3 concise, high-signal industry trends mentioned or implied.\n"
+    "1. Extract up to 3 concise, high-signal industry trends. Never return more than 3 trends."
     "2. For every company referenced:\n"
     "   - name (string)\n"
     "   - context (string) a one-sentence summary explaining its mention or relevance in context.\n"
