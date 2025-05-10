@@ -1,5 +1,10 @@
-# tests/core/test_settings.py
-from src.core.settings import settings
+# tests/core/test_models.py
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
+
+from gtmind.core.settings import settings
 
 
 def test_env_defaults():

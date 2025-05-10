@@ -4,7 +4,9 @@ version = "0.1.0"
 description = "Autonomous research agent backend"
 authors = ["Amrit Kochar <amritkochar.007@gmail.com>"]
 readme = "README.md"
-package-mode = false
+packages = [
+    { include = "gtmind", from = "src" }
+]
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -34,3 +36,7 @@ lint.ignore = ["E501"]
 python_version = "3.11"
 strict = true
 exclude = ["tests"]
+
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
