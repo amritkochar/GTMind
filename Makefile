@@ -40,3 +40,7 @@ serve:
 ui:
 	poetry run streamlit run src/gtmind/ui/app.py
 
+coverage:
+	poetry run coverage run -m pytest
+	poetry run coverage report
+	poetry run coverage html

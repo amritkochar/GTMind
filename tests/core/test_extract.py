@@ -25,7 +25,10 @@ async def test_extract_document(monkeypatch):
     async def _fake_call_llm(doc):
         return {
             "trends": ["AI-driven demand forecasting"],
-            "companies": ["ForecastPro", "ShelfSense"],
+            "companies": [
+                {"name": "ForecastPro", "context": "AI modeling platform"},
+                {"name": "ShelfSense", "context": "smart shelf analytics"}
+                ],
             "whitespace_opportunities": ["Lack of solutions for tier-2 retailers"],
         }
 

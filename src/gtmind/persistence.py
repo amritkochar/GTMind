@@ -21,8 +21,7 @@ from gtmind.core.models import ResearchReport
 class ReportRow(SQLModel, table=True):  # singular row = one ResearchReport
     id: Annotated[int | None, Field(primary_key=True)] = None
     query: str
-    json: str  # raw JSON (can always be re-hydrated)
-
+    report_json: str  # ✅ renamed
 
 # ---------- public API ---------------------------------------------------- #
 _engine_cache: dict[str, any] = {}
@@ -43,7 +42,7 @@ def save_report(report: ResearchReport, db_path: str | Path = "my.db") -> int:
     """
     db_path = str(db_path)
     with Session(_engine(db_path)) as sess:
-        row = ReportRow(query=report.query, json=json.dumps(report.model_dump()))
+        row = ReportRow(query=report.query, report_json=json.dumps(report.model_dump()))
         sess.add(row)
         sess.commit()
         sess.refresh(row)
