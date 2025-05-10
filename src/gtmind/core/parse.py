@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import asyncio
 import logging
-from typing import List
 
 import httpx
 import trafilatura
@@ -69,7 +68,7 @@ async def fetch_and_clean(source: SourceRef) -> CleanDocument | None:
     return CleanDocument(url=source.url, title=source.title, text=text)
 
 
-async def batch_fetch_clean(sources: List[SourceRef]) -> List[CleanDocument]:
+async def batch_fetch_clean(sources: list[SourceRef]) -> list[CleanDocument]:
     if not sources:
         logger.warning("batch_fetch_clean() called with empty sources")
         return []
@@ -84,5 +83,5 @@ async def batch_fetch_clean(sources: List[SourceRef]) -> List[CleanDocument]:
     return [doc for doc in cleaned if doc is not None]
 
 
-def batch_fetch_clean_sync(sources: List[SourceRef]) -> List[CleanDocument]:
+def batch_fetch_clean_sync(sources: list[SourceRef]) -> list[CleanDocument]:
     return asyncio.run(batch_fetch_clean(sources))
