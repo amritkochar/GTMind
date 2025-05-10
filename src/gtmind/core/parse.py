@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
+from typing import List
 
 import httpx
 import trafilatura
@@ -21,21 +22,32 @@ class CleanDocument(SourceRef):
 
 
 async def _download(url: str, client: httpx.AsyncClient) -> str:
+    """Fetch raw HTML, raising FetchError on failure."""
     try:
         resp = await client.get(
             url,
             timeout=20,
             headers={"User-Agent": "Mozilla/5.0 (compatible; GTMindBot/1.0)"}
         )
+        # Raises HTTPStatusError on 4xx/5xx
         resp.raise_for_status()
         return resp.text
-    except (httpx.HTTPError, httpx.TimeoutException) as exc:
-        status = getattr(exc.response, "status_code", None)  # type: ignore[attr-defined]
+
+    except httpx.HTTPStatusError as exc:
+        status = exc.response.status_code
         if status in {401, 403}:
-            logger.warning("Blocked (%s): %s", status, url)
+            logger.warning("Blocked by site (%s): %s", status, url)
         else:
-            logger.warning("Fetch failed %s: %s", url, exc)
-        raise FetchError(f"Failed to fetch {url}: {exc}") from exc
+            logger.warning("HTTP error %s fetching %s", status, url)
+        raise FetchError(f"Failed to fetch {url}: HTTP {status}") from exc
+
+    except httpx.TimeoutException as exc:
+        logger.warning("Timeout fetching %s: %s", url, exc)
+        raise FetchError(f"Timeout fetching {url}") from exc
+
+    except httpx.HTTPError as exc:
+        logger.warning("Network error fetching %s: %s", url, exc)
+        raise FetchError(f"Network error fetching {url}: {exc}") from exc
 
 
 def _clean_html(html: str) -> str | None:
@@ -57,7 +69,7 @@ async def fetch_and_clean(source: SourceRef) -> CleanDocument | None:
     return CleanDocument(url=source.url, title=source.title, text=text)
 
 
-async def batch_fetch_clean(sources: list[SourceRef]) -> list[CleanDocument]:
+async def batch_fetch_clean(sources: List[SourceRef]) -> List[CleanDocument]:
     if not sources:
         logger.warning("batch_fetch_clean() called with empty sources")
         return []
@@ -69,8 +81,8 @@ async def batch_fetch_clean(sources: list[SourceRef]) -> list[CleanDocument]:
             return await fetch_and_clean(src)
 
     cleaned = await asyncio.gather(*(_task(s) for s in sources))
-    return [d for d in cleaned if d is not None]
+    return [doc for doc in cleaned if doc is not None]
 
 
-def batch_fetch_clean_sync(sources: list[SourceRef]) -> list[CleanDocument]:
+def batch_fetch_clean_sync(sources: List[SourceRef]) -> List[CleanDocument]:
     return asyncio.run(batch_fetch_clean(sources))
